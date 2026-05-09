@@ -4,9 +4,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Paleta myApol -->
-    <color name="primary_blue">#FFFFFFFF</color>
-    <color name="dark_bg">#FFFFFFFF</color>
-    <color name="field_border">#FFFFFFFF</color>
-    <color name="text_hint">#FFFFFFFF</color>
-    <color name="error_red">#FFFFFFFF</color>
+    <color name="primary_blue">#3A86FF</color>
+    <color name="dark_bg">#121212</color>
+    <color name="field_border">#333333</color>
+    <color name="text_hint">#888888</color>
+    <color name="error_red">#FF5252</color>
 </resources>
