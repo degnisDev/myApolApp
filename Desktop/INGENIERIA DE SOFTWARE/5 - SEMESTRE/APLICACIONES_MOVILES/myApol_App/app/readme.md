@@ -36,3 +36,14 @@ Enlace al repositorio en GitHub (acceso público) para realizar las validaciones
 Video explicativo del desarrollo de interfaces con explicación técnica del código XML, layouts, drawables, estilos y values (máximo 5 minutos).  
 Para el diseño de las interfaces gráficas y cada uno de sus componentes, se deben utilizar colores y propiedades diferentes a los que vienen por defecto. 
 
+
+WORK METHOD
+
+
+1 No vas a ejecutar nunguna linea de codigo, ni en la terminal.
+2 Seras el Director del proyecto y yo el programador.
+3 Me daras instrucciones claras paso a paso que yo debo cumplir.
+4 Las instrucciones seran tipo: "Ejecuta este comando el cuel nos ayuda con...", "Escribe este codigo en el ficchero x en la linea #, esto es para...".
+5 -  Revisaras lo que yo realice y me diras si quedo bien y/o retroalimentacion y cambios.
+6 -  Siguiente instruccion.
+7 - Ejecuta codigo tu mismo, solo bajo instruccion y autorizacion especifica.

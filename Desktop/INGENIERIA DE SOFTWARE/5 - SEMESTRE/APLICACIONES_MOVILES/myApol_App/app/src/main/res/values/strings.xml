@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">MyAple_App</string>
+    <string name="app_name">myApol</string>
+    <string name="welcome">Welcome back</string>
+    <string name="sign_to_continue">Sign in to continue</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="log_in">Log in</string>
+    <string name="or">OR</string>
+    <string name="no_account">Don't have an account? </string>
+    <string name="sign_Up">Sign Up</string>
+    <string name="login_admin">Login as Admin</string>
 </resources>
