@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAple_App">
         <activity
-            android:name=".activity_cart"
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"

@@ -49,7 +49,8 @@ class CatalogActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_home -> true
                 R.id.nav_cart -> {
-                    val intent = Intent(this, activity_cart::class.java)
+                    // Ahora apunta a la clase correcta: CartActivity
+                    val intent = Intent(this, CartActivity::class.java)
                     startActivity(intent)
                     true
                 }

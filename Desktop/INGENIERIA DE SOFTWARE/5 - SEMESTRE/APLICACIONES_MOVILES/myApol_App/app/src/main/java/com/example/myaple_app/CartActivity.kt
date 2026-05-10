@@ -2,6 +2,7 @@ package com.example.myaple_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +35,13 @@ class CartActivity : AppCompatActivity() {
         val rvCart = findViewById<RecyclerView>(R.id.rvCartItems)
         rvCart.layoutManager = LinearLayoutManager(this)
         rvCart.adapter = CartAdapter(cartItems)
+
+        // --- LÓGICA DE CHECKOUT (Pasarela de Pagos) ---
+        val btnCheckout = findViewById<Button>(R.id.btnCheckout)
+        btnCheckout.setOnClickListener {
+            val intent = Intent(this, PaymentActivity::class.java)
+            startActivity(intent)
+        }
 
         // NAVEGACIÓN
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)

@@ -75,7 +75,7 @@
                     android:id="@+id/tvTotalValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ 7.500.000"
+                    android:text="@string/_7_500_000"
                     android:textColor="@color/primary_blue"
                     android:textSize="20sp"
                     android:textStyle="bold" />

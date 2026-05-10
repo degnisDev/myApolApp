@@ -42,6 +42,17 @@
     <string name="checkout">Checkout</string>
     <string name="Total">Total:</string>
     <string name="empty_cart">Your cart is empty</string>
+    <string name="_7_500_000">$ 7.500.000</string>
 
+    <!-- TEXTOS PASARELA DE PAGOS -->
+    <string name="payment_title">Checkout</string>
+    <string name="payment_method">Select Payment Method</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="pse">PSE / Bank Transfer</string>
+    <string name="apple_pay">Apple Pay</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiry_date">MM/YY</string>
+    <string name="confirm_pay">Confirm Payment</string>
+    <string name="payment_success">Payment Successful! Thank you for choosing myApol.</string>
 
 </resources>
