@@ -1,5 +1,6 @@
 package com.example.myaple_app
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,13 @@ class ProductAdapter(private val productList: List<Product>) :
         holder.tvName.text = product.name
         holder.tvPrice.text = product.price
         holder.imgProduct.setImageResource(product.imageRes)
+
+        // Instrucción #36: Al hacer clic, abrimos el detalle
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProductDetailActivity::class.java)
+            intent.putExtra("PRODUCT_DATA", product)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = productList.size

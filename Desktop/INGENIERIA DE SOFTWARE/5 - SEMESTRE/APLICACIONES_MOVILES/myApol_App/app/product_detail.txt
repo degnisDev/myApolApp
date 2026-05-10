@@ -1,0 +1,139 @@
+=========================================
+      CATÁLOGO DE PRODUCTOS MYAPOL
+=========================================
+
+-----------------------------------------
+1. iPhone 17 Pro Max 256 GB
+-----------------------------------------
+Categoría: Smartphones
+Precio: $5,000,000 COP
+Descripción: El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP. El potente chip A19 Pro garantiza un rendimiento inigualable en IA y procesamiento, todo en un cuerpo de titanio ultradelgado.
+Marca: Apple
+
+-----------------------------------------
+2. iPhone 16 Pro 512 GB
+-----------------------------------------
+Categoría: Smartphones
+Precio: $3,500,000 COP
+Descripción: El iPhone 16 Pro incorpora el innovador botón de Control de Cámara para capturar fotos y video con precisión profesional. Su chip A18 Pro y pantalla Super Retina XDR de 6.3 pulgadas lo hacen perfecto para creativos y profesionales.
+Marca: Apple
+
+-----------------------------------------
+3. iPhone 15 Pro Max 256 GB
+-----------------------------------------
+Categoría: Smartphones
+Precio: $2,500,000 COP
+Descripción: Fabricado en titanio aeroespacial con chip A17 Pro, el iPhone 15 Pro Max introduce el lente periscópico con zoom óptico 5x. El botón de acción personalizable y pantalla ProMotion de 6.7 pulgadas completan esta experiencia premium.
+Marca: Apple
+
+-----------------------------------------
+4. MacBook Air Chip M2 13.6" Midnight 8GB 256GB
+-----------------------------------------
+Categoría: Computers
+Precio: $4,500,000 COP
+Descripción: La MacBook Air con chip M2 redefine lo que significa ser ligera y potente. Con 18 horas de batería, pantalla Liquid Retina de 13.6 pulgadas y diseño silencioso sin ventilador, es la laptop perfecta para estudiantes y profesionales.
+Marca: Apple
+
+-----------------------------------------
+5. MacBook Pro 14 Chip M4 16GB RAM 512GB SSD
+-----------------------------------------
+Categoría: Computers
+Precio: $7,000,000 COP
+Descripción: El MacBook Pro 14 con chip M4 ofrece rendimiento avanzado en formato compacto. Pantalla Liquid Retina XDR de 14.2 pulgadas con ProMotion y sistema de seis altavoces crean una experiencia audiovisual inmersiva y profesional.
+Marca: Apple
+
+-----------------------------------------
+6. iMac 24 M4 16GB 512GB CPU10
+-----------------------------------------
+Categoría: Computers
+Precio: $6,000,000 COP
+Descripción: El iMac con chip M4 combina diseño ultradelgado de 24 pulgadas con pantalla Retina 4.5K deslumbrante. Con 10 núcleos de CPU y GPU integrada de última generación, redefine el espacio de trabajo creativo en casa.
+Marca: Apple
+
+-----------------------------------------
+7. iPad 2025 A16 Chip 11" 512GB WiFi
+-----------------------------------------
+Categoría: Tablets
+Precio: $3,000,000 COP
+Descripción: El iPad 2025 con chip A16 eleva la experiencia del iPad más popular. Pantalla Liquid Retina de 11 pulgadas, Apple Pencil Pro y Magic Keyboard lo convierten en la herramienta versátil ideal para crear, estudiar y entretenerse.
+Marca: Apple
+
+-----------------------------------------
+8. iPad Air 11" M3 128GB
+-----------------------------------------
+Categoría: Tablets
+Precio: $2,500,000 COP
+Descripción: El iPad Air con chip M3 ofrece rendimiento extraordinario en diseño elegante y ligero. Pantalla Liquid Retina de 11 pulgadas y compatibilidad con Apple Pencil Pro lo hacen perfecto para artistas y profesionales creativos.
+Marca: Apple
+
+-----------------------------------------
+9. Apple iPad Pro 13" 6ta Gen 256GB
+-----------------------------------------
+Categoría: Tablets
+Precio: $7,000,000 COP
+Descripción: El iPad Pro 13 con chip M4 es la tableta más delgada y poderosa del mundo. Su pantalla Ultra Retina XDR OLED ofrece colores perfectos y negros puros ideales para profesionales creativos que exigen lo mejor.
+Marca: Apple
+
+-----------------------------------------
+10. Apple Watch Series 9
+-----------------------------------------
+Categoría: Wearables
+Precio: $1,000,000 COP
+Descripción: El Apple Watch Series 9 presenta el gesto Double Tap para controlar sin tocar la pantalla. Con Always-On display más brillante, monitorización de salud avanzada y chip S9 SiP, es el compañero definitivo para tu bienestar.
+Marca: Apple
+
+-----------------------------------------
+11. Apple Watch Ultra 2 GPS + Cellular 49mm
+-----------------------------------------
+Categoría: Wearables
+Precio: $2,500,000 COP
+Descripción: El Apple Watch Ultra 2 es el smartwatch más robusto de Apple para exploradores y atletas de élite. Caja de titanio de 49mm, pantalla de 3000 nits y batería de 60 horas para los entornos más extremos.
+Marca: Apple
+
+-----------------------------------------
+12. AirPods 3ra Generación In-Ear Bluetooth
+-----------------------------------------
+Categoría: Home & Entertainment (Audio)
+Precio: $600,000 COP
+Descripción: Los AirPods de 3ra generación con diseño resistente al sudor y agua. Audio Espacial personalizado y estuche MagSafe los convierten en los compañeros perfectos para deporte y vida diaria.
+Marca: Apple
+
+-----------------------------------------
+13. AirPods Pro 3 Inalámbricos
+-----------------------------------------
+Categoría: Home & Entertainment (Audio)
+Precio: $1,500,000 COP
+Descripción: Los AirPods Pro 3 con chip H2 mejorado y Cancelación Activa de Ruido de siguiente nivel. La función de Escucha activa los convierte en audífonos clínicos certificados con Audio Espacial envolvente.
+Marca: Apple
+
+-----------------------------------------
+14. AirPods Pro 2da Generación
+-----------------------------------------
+Categoría: Home & Entertainment (Audio)
+Precio: $700,000 COP
+Descripción: Los AirPods Pro 2 con chip H2 y Cancelación Activa de Ruido 2x más potente. Audio Espacial dinámico personalizado y carga USB-C los hacen los audífonos más avanzados de Apple.
+Marca: Apple
+
+-----------------------------------------
+15. Apple T-Shirt
+-----------------------------------------
+Categoría: Accessories (Merch)
+Precio: $180,000 COP
+Descripción: Camiseta oficial de Apple Store en algodón premium 100% orgánico con logo bordado. Disponible en blanco, negro y azul. Edición limitada para verdaderos fans de la manzana.
+Marca: Apple
+
+-----------------------------------------
+16. Apple Pin Coleccionable
+-----------------------------------------
+Categoría: Accessories (Merch)
+Precio: $80,000 COP
+Descripción: Pines coleccionables oficiales de Apple en metal de alta calidad con acabado brillante. Ideales para mochilas, chaquetas o vitrinas. Cada pin celebra los íconos más queridos del universo Apple.
+Marca: Apple
+
+-----------------------------------------
+17. Apple Hoodie Buzo
+-----------------------------------------
+Categoría: Accessories (Merch)
+Precio: $350,000 COP
+Descripción: Hoodie oficial de Apple en mezcla de algodón y poliéster reciclado premium con logo Apple bordado. La comodidad y el estilo Apple fusionados para los días más frescos.
+Marca: Apple
