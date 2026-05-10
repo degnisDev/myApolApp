@@ -1,5 +1,6 @@
 package com.example.myaple_app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -42,8 +43,7 @@ class CatalogActivity : AppCompatActivity() {
 
         rvProducts.adapter = ProductAdapter(productList)
 
-        val bottomNav =
-            findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
         // Forzamos que "Home" aparezca como seleccionado al abrir
         bottomNav.selectedItemId = R.id.nav_home
@@ -51,19 +51,19 @@ class CatalogActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Ya estamos aquí, opcionalmente podrías hacer scroll al inicio
+                    // Ya estamos aquí
                     true
                 }
 
                 R.id.nav_cart -> {
                     // Aquí irá la navegación al Carrito (Próxima actividad)
-                    // val intent = Intent(this, CartActivity::class.java)
-                    // startActivity(intent)
                     true
                 }
 
                 R.id.nav_profile -> {
-                    // Aquí irá la navegación al Perfil
+                    // Navegación al Perfil
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 

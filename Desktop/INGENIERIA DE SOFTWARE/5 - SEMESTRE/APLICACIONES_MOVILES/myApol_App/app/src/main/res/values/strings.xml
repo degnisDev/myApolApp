@@ -33,7 +33,7 @@
     <string name="my_orders">My Orders</string>
     <string name="shipping_address">Shipping Address</string>
     <string name="payment_methods">Payment Methods</string>
-    <string name="log_out">Log Out</string>
-    <string name="user_name">Degnis Quevedo</string>
-    <string name="user_email">quevedogeovany10@gmail.com</string>
+    <string name="logout">Logout</string>
+    <string name="user_name_placeholder">Degnis Quevedo</string>
+    <string name="user_email_placeholder">quevedogeovany10@gmail.com</string>
 </resources>
