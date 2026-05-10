@@ -25,48 +25,40 @@ class CatalogActivity : AppCompatActivity() {
         val rvProducts = findViewById<RecyclerView>(R.id.rvProducts)
         rvProducts.layoutManager = GridLayoutManager(this, 2)
 
-        // Lista actualizada con descripciones del archivo product_detail.txt
+        // Lista de productos con sus descripciones
         val productList = listOf(
             Product("iPhone 17 Pro Max", "$ 5.000.000", R.drawable.iphone17_pro_max, 
-                "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP. El potente chip A19 Pro garantiza un rendimiento inigualable."),
+                "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP."),
             Product("iPhone 16 Pro Max", "$ 3.500.000", R.drawable.iphone_16_pro_max, 
-                "El iPhone 16 Pro incorpora el innovador botón de Control de Cámara para capturar fotos y video con precisión profesional."),
+                "El iPhone 16 Pro incorpora el innovador botón de Control de Cámara para precisión profesional."),
             Product("iPhone 15 Pro", "$ 2.500.000", R.drawable.iphone_15_pro, 
-                "Fabricado en titanio aeroespacial con chip A17 Pro, introduce el lente periscópico con zoom óptico 5x."),
+                "Fabricado en titanio aeroespacial con chip A17 Pro y zoom óptico 5x."),
             Product("MacBook Air M2", "$ 4.500.000", R.drawable.mack_book_air_m2, 
-                "La MacBook Air con chip M2 redefine lo que significa ser ligera y potente. Con 18 horas de batería y diseño silencioso."),
+                "Redefine lo que significa ser ligera y potente. 18 horas de batería."),
             Product("AirPods", "$ 2.500.000", R.drawable.airpods, 
-                "Los AirPods Pro con chip H2 mejorado y Cancelación Activa de Ruido de siguiente nivel."),
+                "Chip H2 mejorado y Cancelación Activa de Ruido de siguiente nivel."),
             Product("Apple Watch", "$ 1.000.000", R.drawable.apple_watch, 
-                "El Apple Watch Series 9 presenta el gesto Double Tap para controlar sin tocar la pantalla.")
+                "Compañero definitivo para tu bienestar con monitorización avanzada.")
         )
 
         rvProducts.adapter = ProductAdapter(productList)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-
-        // Forzamos que "Home" aparezca como seleccionado al abrir
         bottomNav.selectedItemId = R.id.nav_home
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    // Ya estamos aquí
-                    true
-                }
-
+                R.id.nav_home -> true
                 R.id.nav_cart -> {
-                    // Aquí irá la navegación al Carrito (Próxima actividad)
+                    // Futura pantalla de carrito
                     true
                 }
-
                 R.id.nav_profile -> {
-                    // Navegación al Perfil
+                    // NAVEGACIÓN AL PERFIL
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
-
                 else -> false
             }
         }
