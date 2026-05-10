@@ -21,4 +21,10 @@
     <string name="phone">Phone</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_account">Already have an account? Log in</string>
+
+    <!-- TEXTOS NAVEGACION -->
+    <string name="nav_home">Home</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_profile">Profile</string>
+    <string name="catalog_title">Catalog myApol</string>
 </resources>

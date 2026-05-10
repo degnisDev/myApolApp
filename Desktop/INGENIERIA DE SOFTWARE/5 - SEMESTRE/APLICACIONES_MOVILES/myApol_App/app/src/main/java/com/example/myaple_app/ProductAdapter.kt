@@ -1,9 +1,10 @@
+package com.example.myaple_app
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.compose.ui.layout.layout
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductAdapter(private val productList: List<Product>) :
