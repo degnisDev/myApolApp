@@ -19,7 +19,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/tvPaymentTitle"
@@ -60,7 +61,10 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/card_number"
                 android:inputType="number"
-                android:background="@android:color/transparent"/>
+                android:textColor="@color/black"
+                android:textColorHint="#757575"
+                android:background="@android:color/transparent"
+                android:importantForAutofill="no" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BDBDBD"/>
 
             <EditText
@@ -69,7 +73,10 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/expiry_date"
                 android:inputType="date"
-                android:background="@android:color/transparent"/>
+                android:textColor="@color/black"
+                android:textColorHint="#757575"
+                android:background="@android:color/transparent"
+                android:importantForAutofill="no" />
             <View android:layout_width="100dp" android:layout_height="1dp" android:background="#BDBDBD"/>
 
             <androidx.appcompat.widget.AppCompatButton
