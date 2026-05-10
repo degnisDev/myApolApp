@@ -27,4 +27,13 @@
     <string name="nav_cart">Cart</string>
     <string name="nav_profile">Profile</string>
     <string name="catalog_title">Catalog myApol</string>
+
+    <!--    TEXTOS DE PROFILE-->
+    <string name="profile_tittle">My Profile</string>
+    <string name="my_orders">My Orders</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="log_out">Log Out</string>
+    <string name="user_name">Degnis Quevedo</string>
+    <string name="user_email">quevedogeovany10@gmail.com</string>
 </resources>

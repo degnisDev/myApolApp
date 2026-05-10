@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CatalogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +41,34 @@ class CatalogActivity : AppCompatActivity() {
         )
 
         rvProducts.adapter = ProductAdapter(productList)
+
+        val bottomNav =
+            findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        // Forzamos que "Home" aparezca como seleccionado al abrir
+        bottomNav.selectedItemId = R.id.nav_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Ya estamos aquí, opcionalmente podrías hacer scroll al inicio
+                    true
+                }
+
+                R.id.nav_cart -> {
+                    // Aquí irá la navegación al Carrito (Próxima actividad)
+                    // val intent = Intent(this, CartActivity::class.java)
+                    // startActivity(intent)
+                    true
+                }
+
+                R.id.nav_profile -> {
+                    // Aquí irá la navegación al Perfil
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
