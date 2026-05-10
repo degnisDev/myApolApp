@@ -48,11 +48,17 @@
     <string name="payment_title">Checkout</string>
     <string name="payment_method">Select Payment Method</string>
     <string name="credit_card">Credit Card</string>
-    <string name="pse">PSE / Bank Transfer</string>
-    <string name="apple_pay">Apple Pay</string>
     <string name="card_number">Card Number</string>
     <string name="expiry_date">MM/YY</string>
     <string name="confirm_pay">Confirm Payment</string>
     <string name="payment_success">Payment Successful! Thank you for choosing myApol.</string>
+
+    <!--TEXTOS PARA ADMIN PANEL-->
+    <string name="admin_name_placeholder">Geovany Quevedo</string>
+    <string name="admin_email_placeholder">quevedogeovany10@gmail.com</string>
+    <string name="stok_managment">Stock Managment</string>
+    <string name="statistics">Statistics</string>
+    <string name="user_managment">User Managment</string>
+
 
 </resources>

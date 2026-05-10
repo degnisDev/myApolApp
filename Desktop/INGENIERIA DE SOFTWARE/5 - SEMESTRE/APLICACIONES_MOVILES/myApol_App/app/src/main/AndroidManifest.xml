@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAple_App">
         <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaymentActivity"
             android:exported="false" />
         <activity
