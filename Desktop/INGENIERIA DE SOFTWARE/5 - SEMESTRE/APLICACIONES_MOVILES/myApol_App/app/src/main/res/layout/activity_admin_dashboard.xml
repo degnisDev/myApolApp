@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- CABECERA (Foto y Nombre del Admin) -->
+    <!-- CABECERA -->
     <LinearLayout
         android:id="@+id/headerProfile"
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- TARJETA GLASS (Panel de Control) -->
+    <!-- PANEL DE CONTROL -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Opción: Gestión de Inventario (Stock Managment) -->
+            <!-- Gestión de Inventario -->
             <LinearLayout
                 android:id="@+id/btnStockManagement"
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 android:layout_height="1dp"
                 android:background="#30FFFFFF" />
 
-            <!-- Opción: Estadísticas -->
+            <!-- Estadísticas -->
             <LinearLayout
                 android:id="@+id/btnStatistics"
                 android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                 android:layout_height="1dp"
                 android:background="#30FFFFFF" />
 
-            <!-- Opción: Gestión de Usuarios -->
+            <!-- Gestión de Usuarios -->
             <LinearLayout
                 android:id="@+id/btnUserManagement"
                 android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                 android:layout_height="1dp"
                 android:background="#30FFFFFF" />
 
-            <!-- Opción: Logout -->
+            <!-- Logout -->
             <LinearLayout
                 android:id="@+id/btnLogoutAction"
                 android:layout_width="match_parent"
