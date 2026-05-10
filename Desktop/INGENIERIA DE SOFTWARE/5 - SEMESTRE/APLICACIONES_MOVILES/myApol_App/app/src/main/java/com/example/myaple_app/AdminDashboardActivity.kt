@@ -20,7 +20,19 @@ class AdminDashboardActivity : AppCompatActivity() {
             insets
         }
 
-        // Lógica de Logout (Reutilizada de ProfileActivity)
+        // Navegación a Gestión de Inventario
+        findViewById<LinearLayout>(R.id.btnStockManagement).setOnClickListener {
+            val intent = Intent(this, AdminStockActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Navegación a Gestión de Usuarios
+        findViewById<LinearLayout>(R.id.btnUserManagement).setOnClickListener {
+            val intent = Intent(this, AdminUserActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Lógica de Logout
         findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

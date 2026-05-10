@@ -61,12 +61,21 @@
     <string name="user_managment">User Managment</string>
 
 
-    <!--TEXTOS PARA ADMIN STOCK-->
+    <!--TEXTOS PARA ADMIN STOCK -->
     <string name="stock_title">Stock Managment</string>
     <string name="search_product">Search Product</string>
     <string name="add_product">Add New Product</string>
-    <string name="stock_count">Stock: $12 M 10 units</string>
+    <string name="stock_count">Stock: %1$d units</string>
+    <string name="stock_hint">Stock</string>
 
 
+    <!-- TEXTOS PRODUCT DETAIL ADMIN -->
+    <string name="product_name_hint">Product Name</string>
+    <string name="product_price_hint">Price (COP)</string>
+    <string name="product_description_hint">Description</string>
+    <string name="product_category_hint">Category</string>
+    <string name="save_product">Save Product</string>
+    <string name="add_image">Tap to add image</string>
+    <string name="product_saved">Product saved successfully</string>
 
 </resources>
