@@ -53,67 +53,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/logout"
-            app:tint="@color/error_red" /> <!-- Usaremos logout temporalmente si no tienes ic_delete -->
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView><?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="12dp">
-
-        <ImageView
-            android:id="@+id/imgCartProduct"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/iphone_15_pro" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvCartProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvCartProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 0.00"
-                android:textColor="@color/primary_blue"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btnDelete"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/logout"
-            app:tint="@color/error_red" /> <!-- Usaremos logout temporalmente si no tienes ic_delete -->
+            android:src="@drawable/ic_delete"
+            app:tint="@color/error_red" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

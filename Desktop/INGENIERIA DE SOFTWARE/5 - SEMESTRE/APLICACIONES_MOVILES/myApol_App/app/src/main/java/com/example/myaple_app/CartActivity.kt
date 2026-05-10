@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class activity_cart : AppCompatActivity() {
+class CartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,17 +25,17 @@ class activity_cart : AppCompatActivity() {
             }
         }
 
-        // --- DATOS DE PRUEBA (Usando nuestra clase Product) ---
+        // DATOS DE PRUEBA
         val cartItems = listOf(
-            Product("iPhone 17 Pro Max", "$ 5.000.000", R.drawable.iphone17_pro_max, "El iPhone 17 Pro Max es la vanguardia tecnológica."),
-            Product("AirPods", "$ 2.500.000", R.drawable.airpods, "Sonido premium sin cables.")
+            Product("iPhone 17 Pro Max", "$ 5.000.000", R.drawable.iphone17_pro_max, ""),
+            Product("AirPods", "$ 2.500.000", R.drawable.airpods, "")
         )
 
         val rvCart = findViewById<RecyclerView>(R.id.rvCartItems)
         rvCart.layoutManager = LinearLayoutManager(this)
         rvCart.adapter = CartAdapter(cartItems)
 
-        // --- NAVEGACIÓN INFERIOR ---
+        // NAVEGACIÓN
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNav.selectedItemId = R.id.nav_cart
         bottomNav.setOnItemSelectedListener { item ->
