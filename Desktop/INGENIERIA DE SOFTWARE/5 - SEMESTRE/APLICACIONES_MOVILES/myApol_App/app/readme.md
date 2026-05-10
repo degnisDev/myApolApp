@@ -37,6 +37,13 @@ Video explicativo del desarrollo de interfaces con explicación técnica del có
 Para el diseño de las interfaces gráficas y cada uno de sus componentes, se deben utilizar colores y propiedades diferentes a los que vienen por defecto. 
 
 
+myApol
+
+Respecto a myApol es una tienda virtual que se dedica a la importacion y comercializacion de productos apple en
+colombia... desde iphones hasta camisetas y pines de la marca
+
+
+
 WORK METHOD
 
 

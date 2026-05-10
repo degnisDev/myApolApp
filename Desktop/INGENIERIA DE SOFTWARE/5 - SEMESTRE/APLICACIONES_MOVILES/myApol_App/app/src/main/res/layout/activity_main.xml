@@ -129,6 +129,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
 
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnBiometric"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/bg_button_primary"-->
+<!--            android:src="@drawable/ic_huella"-->
+<!--            android:padding="12dp"-->
+<!--            app:tint="@color/white"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />-->
+
+
         <View
             android:id="@+id/viewDivider"
             android:layout_width="0dp"

@@ -1,23 +1,24 @@
 <resources>
-    <!--    TEXTOS MAIN O INICIO-->
+    <!-- TEXTOS COMPARTIDOS -->
     <string name="app_name">myApol</string>
-    <string name="welcome_back">Welcome back</string>
-    <string name="sign_in_continue">Sign in to continue</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Forgot password?</string>
     <string name="log_in">Log in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="back">back</string>
+
+    <!-- TEXTOS MAIN -->
+    <string name="welcome_back">Welcome back</string>
+    <string name="sign_in_continue">Sign in to continue</string>
+    <string name="forgot_password">Forgot password?</string>
     <string name="or">OR</string>
     <string name="no_account">Don\'t have an account? </string>
-    <string name="sign_up">Sign Up</string>
     <string name="login_admin">Login as Admin</string>
 
-    <!--    TEXTOS SIGN UP-->
-
-    <string name="create_account">Create Account</string>
+    <!-- TEXTOS SIGN UP -->
+    <string name="create_account">Create Your Account</string>
     <string name="full_name">Full Name</string>
+    <string name="phone">Phone</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="already_have_account">Already have an account? </string>
-
-
+    <string name="already_have_account">Already have an account? Log in</string>
 </resources>
