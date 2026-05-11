@@ -25,7 +25,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // --- LÓGICA DE NAVEGACIÓN ---
 
-        // Configuración del texto "Back" (En reemplazo de la flecha)
+        // Configuración del texto "Back"
         val tvBack = findViewById<TextView>(R.id.tvBack)
         tvBack?.setOnClickListener {
             finish() // Vuelve al Login

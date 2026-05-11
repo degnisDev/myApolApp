@@ -55,7 +55,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- LISTA DE USUARIOS (Corregida con 0dp y constraints laterales) -->
+    <!-- LISTA DE USUARIOS  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUsers"
         android:layout_width="0dp"
@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
-    <!-- BOTÓN AGREGAR (FAB) -->
+    <!-- BOTÓN AGREGAR -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddUser"
         android:layout_width="wrap_content"
@@ -79,7 +79,6 @@
         app:backgroundTint="@color/primary_blue"
         app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/sign_up" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,7 @@ class ProductAdapter(private val productList: List<Product>) :
         holder.tvPrice.text = product.price
         holder.imgProduct.setImageResource(product.imageRes)
 
-        // Instrucción #36: Al hacer clic, abrimos el detalle
+        // Navegación al detalle del producto
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ProductDetailActivity::class.java)
             intent.putExtra("PRODUCT_DATA", product)

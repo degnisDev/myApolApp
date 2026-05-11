@@ -1,50 +1,51 @@
 <resources>
-    <!-- TEXTOS COMPARTIDOS -->
+    <!-- Textos generales -->
     <string name="app_name">myApol</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign Up</string>
-    <string name="back">back</string>
+    <string name="back">Back</string>
+    <string name="logout">Logout</string>
 
-    <!-- TEXTOS MAIN -->
+    <!-- Pantalla de Login -->
     <string name="welcome_back">Welcome back</string>
     <string name="sign_in_continue">Sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="or">OR</string>
     <string name="no_account">Don\'t have an account? </string>
+    <string name="admin">Admin</string>
+    <string name="seller">Seller</string>
     <string name="login_admin">Login as Admin</string>
+    <string name="login_seller">Login as Seller</string>
 
-    <!-- TEXTOS SIGN UP -->
+    <!-- Registro -->
     <string name="create_account">Create Your Account</string>
     <string name="full_name">Full Name</string>
     <string name="phone">Phone</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_account">Already have an account? Log in</string>
 
-    <!-- TEXTOS NAVEGACION -->
+    <!-- Navegación y Catálogo -->
     <string name="nav_home">Home</string>
     <string name="nav_cart">Cart</string>
     <string name="nav_profile">Profile</string>
     <string name="catalog_title">Catalog myApol</string>
 
-    <!--    TEXTOS DE PROFILE-->
+    <!-- Perfil de Usuario -->
     <string name="profile_tittle">My Profile</string>
     <string name="my_orders">My Orders</string>
     <string name="shipping_address">Shipping Address</string>
     <string name="payment_methods">Payment Methods</string>
-    <string name="logout">Logout</string>
     <string name="user_name_placeholder">Degnis Quevedo</string>
     <string name="user_email_placeholder">quevedogeovany10@gmail.com</string>
 
-    <!--    CARRITO DE COMPRAS-->
+    <!-- Carrito y Pagos -->
     <string name="cart_title">My Cart</string>
     <string name="checkout">Checkout</string>
     <string name="Total">Total:</string>
     <string name="empty_cart">Your cart is empty</string>
     <string name="_7_500_000">$ 7.500.000</string>
-
-    <!-- TEXTOS PASARELA DE PAGOS -->
     <string name="payment_title">Checkout</string>
     <string name="payment_method">Select Payment Method</string>
     <string name="credit_card">Credit Card</string>
@@ -53,29 +54,34 @@
     <string name="confirm_pay">Confirm Payment</string>
     <string name="payment_success">Payment Successful! Thank you for choosing myApol.</string>
 
-    <!--TEXTOS PARA ADMIN PANEL-->
+    <!-- Panel de Administración (Compatibilidad con Layouts existentes) -->
+    <string name="stok_managment">Stock Management</string>
+    <string name="user_managment">User Management</string>
+    <string name="statistics">Statistics</string>
     <string name="admin_name_placeholder">Geovany Quevedo</string>
     <string name="admin_email_placeholder">quevedogeovany10@gmail.com</string>
-    <string name="stok_managment">Stock Managment</string>
-    <string name="statistics">Statistics</string>
-    <string name="user_managment">User Managment</string>
 
-
-    <!--TEXTOS PARA ADMIN STOCK -->
-    <string name="stock_title">Stock Managment</string>
-    <string name="search_product">Search Product</string>
-    <string name="add_product">Add New Product</string>
-    <string name="stock_count">Stock: %1$d units</string>
-    <string name="stock_hint">Stock</string>
-
-
-    <!-- TEXTOS PRODUCT DETAIL ADMIN -->
+    <!-- Gestión de Inventario -->
+    <string name="stock_title">Inventory</string>
+    <string name="search_product">Search product...</string>
+    <string name="add_product">Add Product</string>
+    <string name="stock_count_format">Stock: %1$d units</string>
     <string name="product_name_hint">Product Name</string>
     <string name="product_price_hint">Price (COP)</string>
     <string name="product_description_hint">Description</string>
     <string name="product_category_hint">Category</string>
     <string name="save_product">Save Product</string>
     <string name="add_image">Tap to add image</string>
-    <string name="product_saved">Product saved successfully</string>
 
+    <!-- Panel de Vendedor -->
+    <string name="seller_name_placeholder">Carlos Seller</string>
+    <string name="seller_email_placeholder">carlos.seller@myapol.com</string>
+    <string name="monthly_performance">MONTHLY PERFORMANCE</string>
+    <string name="sales_month">Sales this month</string>
+    <string name="bonuses">Bonuses received</string>
+    <string name="returns">Returns</string>
+    <string name="sales_value_demo">45 Units - $ 120.500.000</string>
+    <string name="bonuses_value_demo">3 Units - $ 1.500.000</string>
+    <string name="returns_value_demo">2 Units - $ 3.200.000</string>
+    <string name="stock">Stock</string>
 </resources>

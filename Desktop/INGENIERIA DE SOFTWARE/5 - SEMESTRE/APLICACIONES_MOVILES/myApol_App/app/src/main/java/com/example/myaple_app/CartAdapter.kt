@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+
+
 class CartAdapter(private val cartList: List<Product>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 

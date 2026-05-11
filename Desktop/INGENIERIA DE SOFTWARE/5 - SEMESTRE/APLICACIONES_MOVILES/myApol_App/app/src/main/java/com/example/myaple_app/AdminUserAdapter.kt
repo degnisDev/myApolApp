@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-// Clase de datos temporal para representar a un usuario en el front-end
+
 data class UserItem(val name: String, val role: String)
 
 class AdminUserAdapter(private val userList: List<UserItem>) :
@@ -21,7 +21,7 @@ class AdminUserAdapter(private val userList: List<UserItem>) :
         val btnEditUser: ImageView = view.findViewById(R.id.btnEditUser)
         val btnDeleteUser: ImageView = view.findViewById(R.id.btnDeleteUser)
     }
-
+//    Sobreescribimos los métodos onCreateViewHolder y onBindViewHolder para configurar los elementos de la lista.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_admin_user, parent, false)

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:padding="32dp">
 
-        <!-- IMAGEN DE FONDO -->
+        <!-- Capa de fondo -->
         <ImageView
             android:id="@+id/ivBackground"
             android:layout_width="0dp"
@@ -25,9 +25,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
 
-        <!-- LOGO -->
+        <!-- Logotipo de myApol -->
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="100dp"
@@ -36,10 +37,10 @@
             android:src="@drawable/logo_app"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
 
-
-        <!-- TEXTOS DE BIENVENIDA -->
+        <!-- Sección de bienvenida -->
         <TextView
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
 
-        <!-- CAMPO DE CORREO -->
+        <!-- Formulario de acceso -->
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="0dp"
@@ -73,7 +74,6 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/bg_input_field"
             android:drawableStart="@drawable/ic_email"
-            android:drawableTint="@color/white"
             android:drawablePadding="12dp"
             android:hint="@string/email_address"
             android:inputType="textEmailAddress"
@@ -82,9 +82,9 @@
             android:textColorHint="@color/text_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSignIn"
+            android:autofillHints="emailAddress" />
 
-        <!-- CAMPO DE CONTRASEÑA -->
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="0dp"
@@ -92,7 +92,6 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_input_field"
             android:drawableStart="@drawable/ic_lock"
-            android:drawableTint="@color/white"
             android:drawableEnd="@drawable/ic_eye"
             android:drawablePadding="12dp"
             android:hint="@string/password"
@@ -102,7 +101,8 @@
             android:textColorHint="@color/text_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/etEmail"
+            android:autofillHints="password" />
 
         <TextView
             android:id="@+id/tvForgotPassword"
@@ -129,20 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnBiometric"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:background="@drawable/bg_button_primary"-->
-<!--            android:src="@drawable/ic_huella"-->
-<!--            android:padding="12dp"-->
-<!--            app:tint="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />-->
-
-
+        <!-- Rayita para dividir las secciones -->
         <View
             android:id="@+id/viewDivider"
             android:layout_width="0dp"
@@ -174,6 +161,7 @@
             app:layout_constraintStart_toEndOf="@+id/tvOr"
             app:layout_constraintTop_toTopOf="@+id/viewDivider" />
 
+        <!-- Enlace a registro -->
         <TextView
             android:id="@+id/tvNoAccount"
             android:layout_width="wrap_content"
@@ -198,37 +186,74 @@
             app:layout_constraintStart_toEndOf="@+id/tvNoAccount"
             app:layout_constraintTop_toTopOf="@+id/tvNoAccount" />
 
-        <!-- ACCESO ADMIN -->
+        <!-- Accesos rápidos por rol -->
         <LinearLayout
-            android:id="@+id/btnAdminLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNoAccount"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/tvNoAccount">
 
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ice_admin"
-                app:tint="@color/white" />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/btnAdminLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/login_admin"
-                android:textColor="@color/white" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ice_admin"
+                    app:tint="@color/white"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/admin"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_marginHorizontal="12dp"
+                android:background="@color/field_border" />
+
+            <LinearLayout
+                android:id="@+id/btnSellerLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_profile"
+                    app:tint="@color/white"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/seller"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

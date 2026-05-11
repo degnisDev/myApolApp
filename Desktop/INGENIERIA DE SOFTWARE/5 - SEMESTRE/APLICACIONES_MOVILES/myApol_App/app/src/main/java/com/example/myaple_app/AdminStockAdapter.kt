@@ -33,7 +33,7 @@ class AdminStockAdapter(private val productList: List<Product>) :
         holder.tvStock.text = "Stock: 10 units" // Placeholder para el front-end
         holder.ivProduct.setImageResource(product.imageRes)
 
-        // Acción Editar: Lleva al detalle del producto
+        // Lleva al detalle del producto
         holder.btnEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminProductDetailActivity::class.java)
             intent.putExtra("PRODUCT_DATA", product)

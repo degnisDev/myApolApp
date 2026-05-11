@@ -8,7 +8,7 @@
     android:background="@color/dark_bg"
     tools:context=".AdminStockActivity">
 
-    <!-- FONDO -->
+    <!-- Capa de fondo de la actividad -->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@null" />
 
-    <!-- BARRA SUPERIOR -->
+    <!-- Barra de navegación superior -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -55,7 +55,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- BARRA DE BÚSQUEDA -->
+    <!-- Componente de búsqueda -->
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="0dp"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar"
         android:autofillHints="none" />
 
-    <!-- LISTA DE PRODUCTOS (Corregida con 0dp y constraints laterales) -->
+    <!-- Listado principal de inventario -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStock"
         android:layout_width="0dp"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
-    <!-- BOTÓN AGREGAR (FAB) -->
+    <!-- Botón de acción principal -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddProduct"
         android:layout_width="wrap_content"

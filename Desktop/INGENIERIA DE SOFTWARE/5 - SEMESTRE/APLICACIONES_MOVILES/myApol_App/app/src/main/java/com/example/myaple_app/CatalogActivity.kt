@@ -25,6 +25,7 @@ class CatalogActivity : AppCompatActivity() {
         val rvProducts = findViewById<RecyclerView>(R.id.rvProducts)
         rvProducts.layoutManager = GridLayoutManager(this, 2)
 
+//        lista con todos los productos que se mostrarán en el catálogo
         val productList = listOf(
             Product("iPhone 17 Pro Max", "$ 5.000.000", R.drawable.iphone17_pro_max, 
                 "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel."),
@@ -45,11 +46,11 @@ class CatalogActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNav.selectedItemId = R.id.nav_home
 
+//        Logica para la navegación
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> true
                 R.id.nav_cart -> {
-                    // Ahora apunta a la clase correcta: CartActivity
                     val intent = Intent(this, CartActivity::class.java)
                     startActivity(intent)
                     true

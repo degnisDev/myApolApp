@@ -36,7 +36,7 @@ class CartActivity : AppCompatActivity() {
         rvCart.layoutManager = LinearLayoutManager(this)
         rvCart.adapter = CartAdapter(cartItems)
 
-        // --- LÓGICA DE CHECKOUT (Pasarela de Pagos) ---
+        // --- LÓGICA de Pasarela de Pagos ---
         val btnCheckout = findViewById<Button>(R.id.btnCheckout)
         btnCheckout.setOnClickListener {
             val intent = Intent(this, PaymentActivity::class.java)

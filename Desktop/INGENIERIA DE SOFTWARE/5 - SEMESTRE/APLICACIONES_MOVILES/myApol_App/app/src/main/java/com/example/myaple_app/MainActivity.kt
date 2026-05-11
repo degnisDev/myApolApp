@@ -23,24 +23,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Navegación al registro
-        val btnRegister = findViewById<TextView>(R.id.tvSignUp)
-        btnRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        findViewById<TextView>(R.id.tvSignUp)?.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // Navegación al catálogo después del Login
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        btnLogin.setOnClickListener {
-            val intent = Intent(this, CatalogActivity::class.java)
-            startActivity(intent)
+        // Navegación al catálogo
+        findViewById<Button>(R.id.btnLogin)?.setOnClickListener {
+            startActivity(Intent(this, CatalogActivity::class.java))
         }
 
         // Navegación al Dashboard de Administrador
-        val btnAdminLogin = findViewById<LinearLayout>(R.id.btnAdminLogin)
-        btnAdminLogin.setOnClickListener {
-            val intent = Intent(this, AdminDashboardActivity::class.java)
-            startActivity(intent)
+        findViewById<LinearLayout>(R.id.btnAdminLogin)?.setOnClickListener {
+            startActivity(Intent(this, AdminDashboardActivity::class.java))
+        }
+
+        // Navegación al Dashboard de Vendedor
+        findViewById<LinearLayout>(R.id.btnSellerLogin)?.setOnClickListener {
+            startActivity(Intent(this, SellerDashboardActivity::class.java))
         }
     }
 }

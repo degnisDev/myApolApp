@@ -8,7 +8,7 @@
     android:background="@color/dark_bg"
     tools:context=".ProfileActivity">
 
-    <!-- IMAGEN DE FONDO (Tu nueva bg_2) -->
+    <!-- IMAGEN DE FONDO -->
     <ImageView
         android:id="@+id/ivBackgroundProfile"
         android:layout_width="0dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- CABECERA (Foto y Nombre) -->
+    <!-- CABECERA -->
     <LinearLayout
         android:id="@+id/headerProfile"
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- TARJETA GLASS (Opciones) -->
+    <!-- TARJETA (Opciones) -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"

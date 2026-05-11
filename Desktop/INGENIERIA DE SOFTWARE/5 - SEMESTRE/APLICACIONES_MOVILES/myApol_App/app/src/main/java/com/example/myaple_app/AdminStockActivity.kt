@@ -41,7 +41,7 @@ class AdminStockActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val rvStock = findViewById<RecyclerView>(R.id.rvStock)
         
-        // Datos de ejemplo para que veas el FRONT-END funcionando
+        // Datos de ejemplo
         val sampleProducts = listOf(
             Product("iPhone 15 Pro", "$ 5.500.000", R.drawable.iphone_15_pro, "High-end smartphone"),
             Product("Apple Watch S9", "$ 1.800.000", R.drawable.apple_watch, "Smartwatch"),
@@ -49,7 +49,7 @@ class AdminStockActivity : AppCompatActivity() {
             Product("AirPods Pro 2", "$ 1.200.000", R.drawable.airpods, "Wireless earbuds")
         )
 
-        // IMPORTANTE: Configurar el LayoutManager y el Adapter
+//        LayoutManager y el Adapter
         rvStock.layoutManager = LinearLayoutManager(this)
         rvStock.adapter = AdminStockAdapter(sampleProducts)
     }

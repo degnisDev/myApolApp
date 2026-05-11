@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_bg">
 
+<!--    imagen de lanzamiento de la App-->
     <ImageView
         android:id="@+id/ivLogoSplash"
         android:layout_width="180dp"

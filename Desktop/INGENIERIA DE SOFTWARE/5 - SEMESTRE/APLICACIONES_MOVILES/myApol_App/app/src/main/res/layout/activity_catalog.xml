@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- El RecyclerView ahora se detiene ANTES de la barra de navegación -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <!-- LA BARRA DE NAVEGACIÓN (Aquí es donde aparecen tus 3 iconos) -->
+    <!-- BARRA DE NAVEGACIÓN  -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
