@@ -1,6 +1,5 @@
-package com.example.myaple_app.ui.auth
-
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,11 +8,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.myaple_app.R
+import com.example.myaple_app.supabaseClient.client
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.builtin.Email
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
-    // 1. Declaramos las variables para las vistas
+    // 1. Referencias a las vistas
     private lateinit var etFullName: EditText
     private lateinit var etPhone: EditText
     private lateinit var etEmail: EditText
@@ -26,14 +30,12 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        // 2. Inicializamos las vistas (Mapeo con los IDs del XML)
+        // 2. Inicialización
         initViews()
-
-        // 3. Configuramos las acciones (Clicks)
         setupListeners()
 
-        // Manejo de diseño para pantallas modernas (Edge-to-edge)
-        val mainView = findViewById<android.view.View>(R.id.main)
+        // Ajuste de diseño para barras de sistema
+        val mainView = findViewById<View>(R.id.main)
         mainView?.let {
             ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -44,6 +46,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+
         etFullName = findViewById(R.id.etFullName)
         etPhone = findViewById(R.id.etPhone)
         etEmail = findViewById(R.id.etEmailReg)
@@ -53,21 +56,68 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Botón Volver
+        // Botón volver
         findViewById<TextView>(R.id.tvBack)?.setOnClickListener { finish() }
 
-        // Texto "Ya tengo cuenta" (Redirige al login o cierra esta pantalla)
+        // Ir al login
         findViewById<TextView>(R.id.tvToLogin)?.setOnClickListener { finish() }
 
-        // Botón Registrarse (El gatillo para la funcionalidad de Supabase)
+        // Acción de registro
         btnRegister.setOnClickListener {
-            val name = etFullName.text.toString()
-            if (name.isNotEmpty()) {
-                // Mensaje temporal para confirmar que el botón funciona
-                Toast.makeText(this, "Intentando registrar a $name", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Por favor, ingresa tu nombre", Toast.LENGTH_SHORT).show()
+            performRegistration()
+        }
+    }
+
+    private fun performRegistration() {
+        val name = etFullName.text.toString().trim()
+        val email = etEmail.text.toString().trim()
+        val password = etPassword.text.toString().trim()
+        val confirm = etPasswordConfirm.text.toString().trim()
+        val phone = etPhone.text.toString().trim()
+
+        // --- NOTAS-b: Validaciones de Ingeniería ---
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
+            showToast("Por favor, completa todos los campos")
+            return
+        }
+
+        if (password != confirm) {
+            showToast("Las contraseñas no coinciden")
+            return
+        }
+
+        if (password.length < 6) {
+            showToast("La contraseña debe tener al menos 6 caracteres")
+            return
+        }
+
+        // --- Punto 2: Conexión con Supabase ---
+        lifecycleScope.launch {
+            try {
+                // Bloqueamos el botón para evitar múltiples clics
+                btnRegister.isEnabled = false
+                btnRegister.text = "Registrando..."
+
+                // Registro en Supabase Auth
+                client.auth.signUpWith(Email) {
+                    this.email = email
+                    this.password = password
+                    // Nota: El nombre y teléfono se guardarán en una tabla de perfiles en el siguiente paso
+                }
+
+                showToast("¡Registro exitoso! Revisa tu correo de confirmación")
+                finish() // Cerramos la actividad al tener éxito
+
+            } catch (e: Exception) {
+                // Manejo de errores (Punto 1.1)
+                showToast("Error al registrar: ${e.message}")
+                btnRegister.isEnabled = true
+                btnRegister.text = "SIGN UP"
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
