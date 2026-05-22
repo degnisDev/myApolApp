@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
-import com.example.myaple_app.Product
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AdminStockActivity : AppCompatActivity() {

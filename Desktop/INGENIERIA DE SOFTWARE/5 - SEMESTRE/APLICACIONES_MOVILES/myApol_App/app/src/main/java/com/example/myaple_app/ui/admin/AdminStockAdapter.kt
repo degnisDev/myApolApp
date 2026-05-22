@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myaple_app.Product
 import com.example.myaple_app.R
 
 class AdminStockAdapter(private val productList: List<Product>) :
