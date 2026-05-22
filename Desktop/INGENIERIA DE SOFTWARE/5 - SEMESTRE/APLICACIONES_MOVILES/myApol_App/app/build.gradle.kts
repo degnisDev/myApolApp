@@ -1,15 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
+//    alias(libs.plugins.kotlinAndroid)
+//    alias(libs.plugins.kotlinSerialization)
 }
 
+
 android {
-    namespace = "com.nativas.pruebadefuncionamiento"
+    namespace = "com.example.myaple_app"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.nativas.pruebadefuncionamiento"
+        applicationId = "com.example.myaple_app"
         minSdk = 30
         targetSdk = 36
         versionCode = 1
