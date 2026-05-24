@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
-    // 1. Referencias a las vistas
     private lateinit var etFullName: EditText
     private lateinit var etPhone: EditText
     private lateinit var etEmail: EditText
@@ -34,11 +33,9 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        // 2. Inicialización
         initViews()
         setupListeners()
 
-        // Ajuste de diseño para barras de sistema
         val mainView = findViewById<View>(R.id.main)
         mainView?.let {
             ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
@@ -74,50 +71,48 @@ class RegisterActivity : AppCompatActivity() {
         val confirm = etPasswordConfirm.text.toString().trim()
         val phone = etPhone.text.toString().trim()
 
-        // --- NOTAS-b: Validaciones de Ingeniería ---
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
-            showToast("Por favor, completa todos los campos")
+            showToast("Please fill all fields")
             return
         }
 
         if (password != confirm) {
-            showToast("Las contraseñas no coinciden")
+            showToast("Passwords do not match")
             return
         }
 
         if (password.length < 6) {
-            showToast("La contraseña debe tener al menos 6 caracteres")
+            showToast("Password must be at least 6 characters")
             return
         }
 
-        // --- Punto 2: Conexión con Supabase ---
         lifecycleScope.launch {
             try {
                 btnRegister.isEnabled = false
-                btnRegister.text = "Registrando..."
+                btnRegister.text = "Registering..."
 
-                // 1. Registro en Supabase Auth (Crea la cuenta de acceso)
+                // 1. Auth SignUp
                 client.auth.signUpWith(Email) {
                     this.email = email
                     this.password = password
                 }
 
-                // 2. Obtener el ID del usuario recién creado
                 val userId = client.auth.currentUserOrNull()?.id 
-                    ?: throw Exception("No se pudo obtener el ID del usuario")
+                    ?: throw Exception("User ID not found")
 
-                // 3. Crear el objeto de perfil usando nuestro modelo User.kt
+                // 2. Create profile with default role "client" (Step 3 of the plan)
                 val newUserProfile = User(
                     id = userId,
                     name = name,
                     email = email,
-                    phone = phone
+                    phone = phone,
+                    role = "client"
                 )
 
-                // 4. Insertar en la tabla 'profiles' de la Base de Datos (Punto 4.1 completo)
+                // 3. Save to database
                 client.postgrest["profiles"].insert(newUserProfile)
 
-                showToast("¡Registro exitoso! Revisa tu correo de confirmación")
+                showToast("Registration successful!")
                 finish()
 
             } catch (e: Exception) {

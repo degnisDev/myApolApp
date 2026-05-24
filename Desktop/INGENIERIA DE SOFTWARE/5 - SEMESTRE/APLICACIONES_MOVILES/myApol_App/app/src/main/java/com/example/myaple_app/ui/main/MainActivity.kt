@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,12 +12,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.User
 import com.example.myaple_app.supabaseClient.client
 import com.example.myaple_app.ui.auth.RegisterActivity
 import com.example.myaple_app.ui.catalog.CatalogActivity
 import com.example.myaple_app.ui.admin.AdminDashboardActivity
+import com.example.myaple_app.ui.seller.SellerDashboardActivity
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -59,17 +61,6 @@ class MainActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             performLogin()
         }
-
-        findViewById<LinearLayout>(R.id.btnAdminLogin)?.setOnClickListener {
-            startActivity(Intent(this, AdminDashboardActivity::class.java))
-        }
-
-        // Se comenta Seller por ahora ya que la actividad no existe y detiene la compilación
-        /*
-        findViewById<LinearLayout>(R.id.btnSellerLogin)?.setOnClickListener {
-            // startActivity(Intent(this, SellerDashboardActivity::class.java))
-        }
-        */
     }
 
     private fun performLogin() {
@@ -86,19 +77,48 @@ class MainActivity : AppCompatActivity() {
                 btnLogin.isEnabled = false
                 btnLogin.text = "Iniciando sesión..."
 
+                // 1. Autenticación en Supabase
                 client.auth.signInWith(Email) {
                     this.email = email
                     this.password = password
                 }
 
-                showToast("¡Bienvenido!")
-                val intent = Intent(this@MainActivity, CatalogActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                // 2. Obtener el ID del usuario actual
+                val userId = client.auth.currentUserOrNull()?.id 
+                    ?: throw Exception("User session not found")
+
+                // 3. Consultar el perfil para verificar el rol (Punto #4 del plan)
+                val userProfile = client.postgrest["profiles"].select {
+                    filter {
+                        eq("id", userId)
+                    }
+                }.decodeSingle<User>()
+
+                // 4. Enrutamiento según el Rol (Punto #1 y #4 del plan)
+                when (userProfile.role) {
+                    "admin" -> {
+                        showToast("You are an administrator")
+                        val intent = Intent(this@MainActivity, AdminDashboardActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                    "seller" -> {
+                        showToast("You are a seller")
+                        val intent = Intent(this@MainActivity, SellerDashboardActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                    else -> {
+                        showToast("Welcome!")
+                        val intent = Intent(this@MainActivity, CatalogActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                }
                 finish()
 
             } catch (e: Exception) {
-                showToast("Error: Usuario o contraseña incorrectos")
+                showToast("Error: ${e.message}")
                 btnLogin.isEnabled = true
                 btnLogin.text = "LOG IN"
             }
