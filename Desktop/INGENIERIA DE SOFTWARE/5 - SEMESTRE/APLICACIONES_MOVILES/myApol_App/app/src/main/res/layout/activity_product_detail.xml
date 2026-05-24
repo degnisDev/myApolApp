@@ -86,7 +86,7 @@
         android:layout_height="60dp"
         android:layout_margin="24dp"
         android:background="@drawable/bg_button_primary"
-        android:text="Añadir al Carrito"
+        android:text="Add to cart"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"

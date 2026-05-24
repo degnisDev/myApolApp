@@ -10,4 +10,4 @@ data class Product(
     val price: Double,
     val stock: Int,
     val imageUrl: String? = null
-)
+) : java.io.Serializable

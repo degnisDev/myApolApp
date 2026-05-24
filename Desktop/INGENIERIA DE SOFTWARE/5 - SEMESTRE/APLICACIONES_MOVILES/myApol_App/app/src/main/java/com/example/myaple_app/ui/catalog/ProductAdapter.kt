@@ -1,10 +1,13 @@
 package com.example.myaple_app.ui.catalog
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
@@ -16,6 +19,7 @@ class ProductAdapter(private val productList: List<Product>) :
         val ivProduct: ImageView = view.findViewById(R.id.imgProduct)
         val tvName: TextView = view.findViewById(R.id.tvProductName)
         val tvPrice: TextView = view.findViewById(R.id.tvProductPrice)
+        val btnAdd: Button = view.findViewById(R.id.btnAddToCart)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -31,7 +35,7 @@ class ProductAdapter(private val productList: List<Product>) :
         holder.tvName.text = product.name
         holder.tvPrice.text = "$ ${product.price}"
         
-        // Buscamos dinámicamente la imagen en drawable usando el nombre guardado en imageUrl
+        // Carga de imagen
         val imageResId = if (!product.imageUrl.isNullOrEmpty()) {
             context.resources.getIdentifier(product.imageUrl, "drawable", context.packageName)
         } else 0
@@ -39,8 +43,20 @@ class ProductAdapter(private val productList: List<Product>) :
         if (imageResId != 0) {
             holder.ivProduct.setImageResource(imageResId)
         } else {
-            // Si no se encuentra, ponemos el logo por defecto
             holder.ivProduct.setImageResource(R.drawable.logo_app)
+        }
+
+        // Acción 1: Clic en la tarjeta para ver detalles
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ProductDetailActivity::class.java)
+            intent.putExtra("PRODUCT_DATA", product)
+            context.startActivity(intent)
+        }
+
+        // Acción 2: Clic en "Ver más" / "Agregar"
+        holder.btnAdd.setOnClickListener {
+            // Por ahora solo mostramos un aviso, luego conectaremos con el carrito real
+            Toast.makeText(context, "${product.name} añadido al carrito", Toast.LENGTH_SHORT).show()
         }
     }
 
