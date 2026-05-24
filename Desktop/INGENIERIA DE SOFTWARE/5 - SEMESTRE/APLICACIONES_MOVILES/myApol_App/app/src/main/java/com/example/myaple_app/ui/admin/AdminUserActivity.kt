@@ -1,5 +1,6 @@
 package com.example.myaple_app.ui.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.User
 import com.example.myaple_app.supabaseClient.client
+import com.example.myaple_app.ui.auth.RegisterActivity
 import io.github.jan.supabase.postgrest.postgrest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
@@ -37,11 +39,20 @@ class AdminUserActivity : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
+        
+        // Habilitamos el botón "+" para crear usuarios (Punto 4.3 completo)
         findViewById<FloatingActionButton>(R.id.fabAddUser).setOnClickListener {
-            showToast("To add users, use SignUp screen")
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         setupRecyclerView()
+    }
+
+    // Usamos onResume para que la lista se actualice automáticamente 
+    // cuando el Admin regrese de la pantalla de Registro
+    override fun onResume() {
+        super.onResume()
         fetchUsers()
     }
 
@@ -110,23 +121,14 @@ class AdminUserActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 Log.d("ADMIN_CRUD", "Deleting user ID: ${user.id}")
-                
-                // Punto 4.3: DELETE - Operación real
                 client.postgrest["profiles"].delete {
-                    filter {
-                        eq("id", user.id)
-                    }
+                    filter { eq("id", user.id) }
                 }
-                
                 showToast("User deleted from DB")
-                
-                // Limpieza visual inmediata antes de refrescar
                 userList.remove(user)
                 adapter.updateData(userList)
-                
                 delay(500)
-                fetchUsers() // Refresco final de seguridad
-                
+                fetchUsers()
             } catch (e: Exception) {
                 Log.e("ADMIN_CRUD", "Delete failed", e)
                 showToast("Error deleting: ${e.message}")
