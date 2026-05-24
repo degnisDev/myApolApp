@@ -1,9 +1,11 @@
 package com.example.myaple_app.ui.admin
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -15,6 +17,7 @@ import com.example.myaple_app.data.model.User
 import com.example.myaple_app.supabaseClient.client
 import io.github.jan.supabase.postgrest.postgrest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AdminUserActivity : AppCompatActivity() {
@@ -33,12 +36,9 @@ class AdminUserActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<ImageView>(R.id.btnBack).setOnClickListener {
-            finish()
-        }
-
+        findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
         findViewById<FloatingActionButton>(R.id.fabAddUser).setOnClickListener {
-            Toast.makeText(this, "Para agregar, usa el Registro (SignUp)", Toast.LENGTH_SHORT).show()
+            showToast("To add users, use SignUp screen")
         }
 
         setupRecyclerView()
@@ -47,9 +47,11 @@ class AdminUserActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val rvUsers = findViewById<RecyclerView>(R.id.rvUsers)
-        adapter = AdminUserAdapter(userList) { user ->
-            deleteUser(user)
-        }
+        adapter = AdminUserAdapter(
+            userList,
+            onEditClick = { user -> showRoleDialog(user) },
+            onDeleteClick = { user -> showDeleteConfirmation(user) }
+        )
         rvUsers.layoutManager = LinearLayoutManager(this)
         rvUsers.adapter = adapter
     }
@@ -57,32 +59,82 @@ class AdminUserActivity : AppCompatActivity() {
     private fun fetchUsers() {
         lifecycleScope.launch {
             try {
-                // Punto 4.3: READ del CRUD
                 val users = client.postgrest["profiles"].select().decodeList<User>()
                 userList.clear()
                 userList.addAll(users)
                 adapter.updateData(userList)
+                Log.d("ADMIN_CRUD", "Fetch: ${users.size} users found")
             } catch (e: Exception) {
-                Toast.makeText(this@AdminUserActivity, "Error al cargar: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("ADMIN_CRUD", "Fetch failed", e)
+                showToast("Error loading: ${e.message}")
             }
         }
+    }
+
+    private fun showRoleDialog(user: User) {
+        val roles = arrayOf("admin", "seller", "client")
+        AlertDialog.Builder(this)
+            .setTitle("Change role for ${user.name}")
+            .setItems(roles) { _, which ->
+                updateUserRole(user, roles[which])
+            }
+            .show()
+    }
+
+    private fun updateUserRole(user: User, newRole: String) {
+        lifecycleScope.launch {
+            try {
+                val updateData = mapOf("role" to newRole)
+                client.postgrest["profiles"].update(updateData) {
+                    filter { eq("id", user.id) }
+                }
+                showToast("Role updated to $newRole")
+                delay(800)
+                fetchUsers()
+            } catch (e: Exception) {
+                showToast("Error: ${e.message}")
+            }
+        }
+    }
+
+    private fun showDeleteConfirmation(user: User) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete User")
+            .setMessage("Remove ${user.name} permanently?")
+            .setPositiveButton("Delete") { _, _ -> deleteUser(user) }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun deleteUser(user: User) {
         lifecycleScope.launch {
             try {
-                // Punto 4.3: DELETE del CRUD
+                Log.d("ADMIN_CRUD", "Deleting user ID: ${user.id}")
+                
+                // Punto 4.3: DELETE - Operación real
                 client.postgrest["profiles"].delete {
                     filter {
                         eq("id", user.id)
                     }
                 }
+                
+                showToast("User deleted from DB")
+                
+                // Limpieza visual inmediata antes de refrescar
                 userList.remove(user)
                 adapter.updateData(userList)
-                Toast.makeText(this@AdminUserActivity, "Usuario eliminado", Toast.LENGTH_SHORT).show()
+                
+                delay(500)
+                fetchUsers() // Refresco final de seguridad
+                
             } catch (e: Exception) {
-                Toast.makeText(this@AdminUserActivity, "Error al eliminar: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("ADMIN_CRUD", "Delete failed", e)
+                showToast("Error deleting: ${e.message}")
             }
         }
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

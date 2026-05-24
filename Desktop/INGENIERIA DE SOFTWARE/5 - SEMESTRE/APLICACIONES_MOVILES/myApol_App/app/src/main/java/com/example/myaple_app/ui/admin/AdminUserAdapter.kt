@@ -5,20 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.User
 
 class AdminUserAdapter(
     private var userList: List<User>,
+    private val onEditClick: (User) -> Unit,
     private val onDeleteClick: (User) -> Unit
 ) : RecyclerView.Adapter<AdminUserAdapter.UserViewHolder>() {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivUserIcon: ImageView = view.findViewById(R.id.ivUserIcon)
         val tvUserName: TextView = view.findViewById(R.id.tvUserName)
-        val tvUserEmail: TextView = view.findViewById(R.id.tvUserRole) // Usamos el ID existente para el email
+        val tvUserRole: TextView = view.findViewById(R.id.tvUserRole)
         val btnEditUser: ImageView = view.findViewById(R.id.btnEditUser)
         val btnDeleteUser: ImageView = view.findViewById(R.id.btnDeleteUser)
     }
@@ -33,11 +33,11 @@ class AdminUserAdapter(
         val user = userList[position]
         
         holder.tvUserName.text = user.name
-        holder.tvUserEmail.text = user.email
+        holder.tvUserRole.text = "Role: ${user.role}"
         holder.ivUserIcon.setImageResource(R.drawable.ic_profile)
 
         holder.btnEditUser.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Editar: ${user.name}", Toast.LENGTH_SHORT).show()
+            onEditClick(user)
         }
 
         holder.btnDeleteUser.setOnClickListener {
