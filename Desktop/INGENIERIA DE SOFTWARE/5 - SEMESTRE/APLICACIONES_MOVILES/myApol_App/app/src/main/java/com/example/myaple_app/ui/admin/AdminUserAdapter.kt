@@ -8,14 +8,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.User
 
-class AdminUserAdapter(private val userList: List<UserItem>) :
-    RecyclerView.Adapter<AdminUserAdapter.UserViewHolder>() {
+class AdminUserAdapter(
+    private var userList: List<User>,
+    private val onDeleteClick: (User) -> Unit
+) : RecyclerView.Adapter<AdminUserAdapter.UserViewHolder>() {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivUserIcon: ImageView = view.findViewById(R.id.ivUserIcon)
         val tvUserName: TextView = view.findViewById(R.id.tvUserName)
-        val tvUserRole: TextView = view.findViewById(R.id.tvUserRole)
+        val tvUserEmail: TextView = view.findViewById(R.id.tvUserRole) // Usamos el ID existente para el email
         val btnEditUser: ImageView = view.findViewById(R.id.btnEditUser)
         val btnDeleteUser: ImageView = view.findViewById(R.id.btnDeleteUser)
     }
@@ -30,17 +33,22 @@ class AdminUserAdapter(private val userList: List<UserItem>) :
         val user = userList[position]
         
         holder.tvUserName.text = user.name
-        holder.tvUserRole.text = "Role: ${user.role}"
+        holder.tvUserEmail.text = user.email
         holder.ivUserIcon.setImageResource(R.drawable.ic_profile)
 
         holder.btnEditUser.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Edit user: ${user.name}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.itemView.context, "Editar: ${user.name}", Toast.LENGTH_SHORT).show()
         }
 
         holder.btnDeleteUser.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Remove user: ${user.name}", Toast.LENGTH_SHORT).show()
+            onDeleteClick(user)
         }
     }
 
     override fun getItemCount(): Int = userList.size
+
+    fun updateData(newList: List<User>) {
+        this.userList = newList
+        notifyDataSetChanged()
+    }
 }

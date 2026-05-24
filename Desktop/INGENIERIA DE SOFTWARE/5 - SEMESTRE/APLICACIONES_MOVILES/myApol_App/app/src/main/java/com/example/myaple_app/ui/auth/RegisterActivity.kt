@@ -1,3 +1,5 @@
+package com.example.myaple_app.ui.auth
+
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,9 +12,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.User
 import com.example.myaple_app.supabaseClient.client
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -46,7 +50,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-
         etFullName = findViewById(R.id.etFullName)
         etPhone = findViewById(R.id.etPhone)
         etEmail = findViewById(R.id.etEmailReg)
@@ -56,13 +59,9 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Botón volver
         findViewById<TextView>(R.id.tvBack)?.setOnClickListener { finish() }
-
-        // Ir al login
         findViewById<TextView>(R.id.tvToLogin)?.setOnClickListener { finish() }
 
-        // Acción de registro
         btnRegister.setOnClickListener {
             performRegistration()
         }
@@ -94,23 +93,35 @@ class RegisterActivity : AppCompatActivity() {
         // --- Punto 2: Conexión con Supabase ---
         lifecycleScope.launch {
             try {
-                // Bloqueamos el botón para evitar múltiples clics
                 btnRegister.isEnabled = false
                 btnRegister.text = "Registrando..."
 
-                // Registro en Supabase Auth
+                // 1. Registro en Supabase Auth (Crea la cuenta de acceso)
                 client.auth.signUpWith(Email) {
                     this.email = email
                     this.password = password
-                    // Nota: El nombre y teléfono se guardarán en una tabla de perfiles en el siguiente paso
                 }
 
+                // 2. Obtener el ID del usuario recién creado
+                val userId = client.auth.currentUserOrNull()?.id 
+                    ?: throw Exception("No se pudo obtener el ID del usuario")
+
+                // 3. Crear el objeto de perfil usando nuestro modelo User.kt
+                val newUserProfile = User(
+                    id = userId,
+                    name = name,
+                    email = email,
+                    phone = phone
+                )
+
+                // 4. Insertar en la tabla 'profiles' de la Base de Datos (Punto 4.1 completo)
+                client.postgrest["profiles"].insert(newUserProfile)
+
                 showToast("¡Registro exitoso! Revisa tu correo de confirmación")
-                finish() // Cerramos la actividad al tener éxito
+                finish()
 
             } catch (e: Exception) {
-                // Manejo de errores (Punto 1.1)
-                showToast("Error al registrar: ${e.message}")
+                showToast("Error: ${e.message}")
                 btnRegister.isEnabled = true
                 btnRegister.text = "SIGN UP"
             }
