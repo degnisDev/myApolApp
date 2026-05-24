@@ -17,7 +17,6 @@ import com.example.myaple_app.supabaseClient.client
 import com.example.myaple_app.ui.auth.RegisterActivity
 import com.example.myaple_app.ui.catalog.CatalogActivity
 import com.example.myaple_app.ui.admin.AdminDashboardActivity
-import com.example.myaple_app.ui.seller.SellerDashboardActivity
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.coroutines.launch
@@ -36,10 +35,13 @@ class MainActivity : AppCompatActivity() {
         initViews()
         setupListeners()
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val mainView = findViewById<android.view.View>(R.id.main)
+        mainView?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
     }
 
@@ -50,24 +52,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Ir a Registro
         findViewById<TextView>(R.id.tvSignUp)?.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // Botón de Login con Supabase
         btnLogin.setOnClickListener {
             performLogin()
         }
 
-        // Accesos rápidos (Solo para desarrollo, en producción deberían requerir rol de Admin/Seller)
         findViewById<LinearLayout>(R.id.btnAdminLogin)?.setOnClickListener {
             startActivity(Intent(this, AdminDashboardActivity::class.java))
         }
 
+        // Se comenta Seller por ahora ya que la actividad no existe y detiene la compilación
+        /*
         findViewById<LinearLayout>(R.id.btnSellerLogin)?.setOnClickListener {
-            startActivity(Intent(this, SellerDashboardActivity::class.java))
+            // startActivity(Intent(this, SellerDashboardActivity::class.java))
         }
+        */
     }
 
     private fun performLogin() {
@@ -84,14 +86,12 @@ class MainActivity : AppCompatActivity() {
                 btnLogin.isEnabled = false
                 btnLogin.text = "Iniciando sesión..."
 
-                // Intento de login en Supabase
                 client.auth.signInWith(Email) {
                     this.email = email
                     this.password = password
                 }
 
                 showToast("¡Bienvenido!")
-                // Si el login es correcto, vamos al Catálogo
                 val intent = Intent(this@MainActivity, CatalogActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

@@ -3,6 +3,7 @@ package com.example.myaple_app.ui.cart
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
 import com.example.myaple_app.ui.catalog.CatalogActivity
-import com.example.myaple_app.ui.main.ProfileActivity
+// import com.example.myaple_app.ui.main.ProfileActivity // Comentado porque no existe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity() {
@@ -32,8 +33,8 @@ class CartActivity : AppCompatActivity() {
 
         // DATOS DE PRUEBA
         val cartItems = listOf(
-            Product(name = "iPhone 17 Pro Max", price = 5000000.0, description = "", stock = 10),
-            Product(name = "AirPods", price = 2500000.0, description = "", stock = 20)
+            Product(id = 101, name = "iPhone 17 Pro Max", price = 5000000.0, description = "", stock = 10),
+            Product(id = 102, name = "AirPods", price = 2500000.0, description = "", stock = 20)
         )
 
         val rvCart = findViewById<RecyclerView>(R.id.rvCartItems)
@@ -42,8 +43,12 @@ class CartActivity : AppCompatActivity() {
 
         val btnCheckout = findViewById<Button>(R.id.btnCheckout)
         btnCheckout.setOnClickListener {
+            // Comentado porque PaymentActivity no existe
+            /*
             val intent = Intent(this, PaymentActivity::class.java)
             startActivity(intent)
+            */
+            Toast.makeText(this, "Funcionalidad de pago en desarrollo", Toast.LENGTH_SHORT).show()
         }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -57,8 +62,8 @@ class CartActivity : AppCompatActivity() {
                 }
                 R.id.nav_cart -> true
                 R.id.nav_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    finish()
+                    // startActivity(Intent(this, ProfileActivity::class.java))
+                    Toast.makeText(this, "Perfil en desarrollo", Toast.LENGTH_SHORT).show()
                     true
                 }
                 else -> false

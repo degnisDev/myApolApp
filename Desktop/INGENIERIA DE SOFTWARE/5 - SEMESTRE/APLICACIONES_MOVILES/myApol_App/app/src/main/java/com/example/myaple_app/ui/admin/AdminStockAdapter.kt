@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.Product
 
 class AdminStockAdapter(private val productList: List<Product>) :
     RecyclerView.Adapter<AdminStockAdapter.StockViewHolder>() {
@@ -31,13 +32,17 @@ class AdminStockAdapter(private val productList: List<Product>) :
         val product = productList[position]
         
         holder.tvName.text = product.name
-        holder.tvStock.text = "Stock: 10 units" // Placeholder para el front-end
-        holder.ivProduct.setImageResource(product.imageRes)
+        holder.tvStock.text = "Stock: ${product.stock} units"
+        
+        // Usamos un icono por defecto ya que el modelo usa URLs y no recursos locales
+        holder.ivProduct.setImageResource(R.drawable.logo_app) 
 
         // Lleva al detalle del producto
         holder.btnEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminProductDetailActivity::class.java)
-            intent.putExtra("PRODUCT_DATA", product)
+            // Nota: Para pasar el objeto completo, Product debe ser Serializable o Parcelable
+            // Por ahora solo enviamos el nombre para que no falle el intent
+            intent.putExtra("PRODUCT_NAME", product.name)
             holder.itemView.context.startActivity(intent)
         }
 
