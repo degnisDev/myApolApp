@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
 import com.example.myaple_app.supabaseClient
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Order
@@ -73,7 +75,42 @@ class AdminStockActivity : AppCompatActivity() {
 
         btnDeleteTop.setOnClickListener {
             selectedProduct?.let { product ->
-                Toast.makeText(this, "Eliminar: ${product.name}", Toast.LENGTH_SHORT).show()
+                showDeleteConfirmation(product)
+            }
+        }
+    }
+
+    private fun showDeleteConfirmation(product: Product) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Delete Product")
+            .setMessage("Are you sure you want to delete ${product.name}? This action cannot be undone.")
+            .setNegativeButton("Cancel", null)
+            .setPositiveButton("Delete") { _, _ ->
+                deleteProductFromSupabase(product)
+            }
+            .show()
+    }
+
+    private fun deleteProductFromSupabase(product: Product) {
+        lifecycleScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    supabaseClient.client.postgrest["products"].delete {
+                        filter {
+                            eq("id", product.id ?: -1)
+                        }
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@AdminStockActivity, "${product.name} deleted", Toast.LENGTH_SHORT).show()
+                    fetchProducts() // Recargar lista
+                    selectedProduct = null
+                    toggleActionButtons(false)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@AdminStockActivity, "Error deleting: ${e.message}", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -98,7 +135,6 @@ class AdminStockActivity : AppCompatActivity() {
     private fun fetchProducts() {
         lifecycleScope.launch {
             try {
-                // Traemos productos ordenados por ID para asegurar que el ID 1 aparezca primero
                 val products = withContext(Dispatchers.IO) {
                     supabaseClient.client.postgrest["products"]
                         .select() {
@@ -110,14 +146,10 @@ class AdminStockActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     adapter.updateData(products)
                     updateSummary(products)
-                    // Toast de depuración para confirmar carga
-                    if (products.isNotEmpty()) {
-                        Toast.makeText(this@AdminStockActivity, "Cargados ${products.size} productos", Toast.LENGTH_SHORT).show()
-                    }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminStockActivity, "Error loading: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
