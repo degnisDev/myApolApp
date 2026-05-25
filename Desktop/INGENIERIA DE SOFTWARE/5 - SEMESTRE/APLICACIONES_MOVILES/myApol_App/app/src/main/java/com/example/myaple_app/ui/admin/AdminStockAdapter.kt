@@ -1,25 +1,29 @@
 package com.example.myaple_app.ui.admin
 
-import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
 
-class AdminStockAdapter(private val productList: List<Product>) :
-    RecyclerView.Adapter<AdminStockAdapter.StockViewHolder>() {
+class AdminStockAdapter(
+    private var productList: List<Product>,
+    private val onProductSelected: (Product?) -> Unit
+) : RecyclerView.Adapter<AdminStockAdapter.StockViewHolder>() {
+
+    private var selectedPosition: Int = RecyclerView.NO_POSITION
 
     class StockViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivProduct: ImageView = view.findViewById(R.id.ivProductImage)
+        val card: CardView = view.findViewById(R.id.cardProduct)
+        val tvId: TextView = view.findViewById(R.id.tvProductId)
         val tvName: TextView = view.findViewById(R.id.tvProductName)
         val tvStock: TextView = view.findViewById(R.id.tvProductStock)
-        val btnEdit: ImageView = view.findViewById(R.id.btnEdit)
-        val btnDelete: ImageView = view.findViewById(R.id.btnDelete)
+        val tvPrice: TextView = view.findViewById(R.id.tvProductPrice)
+        val tvCategory: TextView = view.findViewById(R.id.tvProductCategory)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockViewHolder {
@@ -31,25 +35,38 @@ class AdminStockAdapter(private val productList: List<Product>) :
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
         val product = productList[position]
         
+        holder.tvId.text = product.id.toString()
         holder.tvName.text = product.name
-        holder.tvStock.text = "Stock: ${product.stock} units"
-        
-        // Usamos un icono por defecto ya que el modelo usa URLs y no recursos locales
-        holder.ivProduct.setImageResource(R.drawable.logo_app) 
+        holder.tvStock.text = product.stock.toString()
+        holder.tvPrice.text = "$${String.format("%,.0f", product.price)}"
+        holder.tvCategory.text = product.category ?: "N/A"
 
-        // Lleva al detalle del producto
-        holder.btnEdit.setOnClickListener {
-            val intent = Intent(holder.itemView.context, AdminProductDetailActivity::class.java)
-            // Nota: Para pasar el objeto completo, Product debe ser Serializable o Parcelable
-            // Por ahora solo enviamos el nombre para que no falle el intent
-            intent.putExtra("PRODUCT_NAME", product.name)
-            holder.itemView.context.startActivity(intent)
+        // Lógica de Selección Visual
+        if (selectedPosition == position) {
+            holder.card.setCardBackgroundColor(Color.parseColor("#40FFFFFF")) // Resaltado
+        } else {
+            holder.card.setCardBackgroundColor(Color.parseColor("#20FFFFFF")) // Normal
         }
 
-        // Acción Eliminar: Simulación
-        holder.btnDelete.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Removing: ${product.name}", Toast.LENGTH_SHORT).show()
+        holder.itemView.setOnClickListener {
+            val previousSelected = selectedPosition
+            if (selectedPosition == position) {
+                // Deseleccionar si toca el mismo
+                selectedPosition = RecyclerView.NO_POSITION
+                onProductSelected(null)
+            } else {
+                selectedPosition = position
+                onProductSelected(product)
+            }
+            notifyItemChanged(previousSelected)
+            notifyItemChanged(selectedPosition)
         }
+    }
+
+    fun updateData(newList: List<Product>) {
+        this.productList = newList
+        this.selectedPosition = RecyclerView.NO_POSITION
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = productList.size

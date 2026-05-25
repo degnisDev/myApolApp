@@ -35,7 +35,7 @@ class ProductAdapter(private val productList: List<Product>) :
         holder.tvName.text = product.name
         holder.tvPrice.text = "$ ${product.price}"
         
-        // Carga de imagen
+        // Carga de imagen (Revertido a la lógica original)
         val imageResId = if (!product.imageUrl.isNullOrEmpty()) {
             context.resources.getIdentifier(product.imageUrl, "drawable", context.packageName)
         } else 0
@@ -55,7 +55,6 @@ class ProductAdapter(private val productList: List<Product>) :
 
         // Acción 2: Clic en "Ver más" / "Agregar"
         holder.btnAdd.setOnClickListener {
-            // Por ahora solo mostramos un aviso, luego conectaremos con el carrito real
             Toast.makeText(context, "${product.name} añadido al carrito", Toast.LENGTH_SHORT).show()
         }
     }
