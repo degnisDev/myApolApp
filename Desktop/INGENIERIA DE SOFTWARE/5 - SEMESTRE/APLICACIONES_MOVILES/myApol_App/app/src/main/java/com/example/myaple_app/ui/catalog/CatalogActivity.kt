@@ -29,7 +29,7 @@ class CatalogActivity : AppCompatActivity() {
         // --- RESTAURACIÓN DE CATÁLOGO A 6 PRODUCTOS (NOTAS-c) ---
         // Ajustamos al nuevo constructor de Product (id, name, desc, price, stock, category, imageUrl)
         val products = listOf(
-            Product(1, "iPhone 17 Pro Max 256 GB", "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP. El potente chip A19 Pro garantiza un rendimiento inigualable en IA.", 5000000.0, 10, null, "iphone17_pro_max"),
+            Product(7, "iPhone 17 Pro Max 256 GB", "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP. El potente chip A19 Pro garantiza un rendimiento inigualable en IA.", 5000000.0, 10, null, "iphone17_pro_max"),
             Product(2, "iPhone 16 Pro 512 GB", "El iPhone 16 Pro incorpora el innovador botón de Control de Cámara para capturar fotos y video con precisión profesional. Chip A18 Pro y pantalla Super Retina XDR.", 3500000.0, 15, null, "iphone_16_pro_max"),
             Product(3, "iPhone 15 Pro Max 256 GB", "Fabricado en titanio aeroespacial con chip A17 Pro, introduce el lente periscópico con zoom óptico 5x. Pantalla ProMotion de 6.7 pulgadas.", 2500000.0, 20, null, "iphone_15_pro"),
             Product(4, "MacBook Air Chip M2", "La MacBook Air con chip M2 redefine lo que significa ser ligera y potente. Con 18 horas de batería y pantalla Liquid Retina de 13.6 pulgadas.", 4500000.0, 8, null, "mack_book_air_m2"),

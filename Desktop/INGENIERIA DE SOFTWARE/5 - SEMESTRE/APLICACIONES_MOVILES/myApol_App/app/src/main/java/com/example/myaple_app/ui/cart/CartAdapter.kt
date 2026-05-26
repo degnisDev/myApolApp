@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
@@ -18,7 +17,6 @@ class CartAdapter(
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imgProduct: ImageView = view.findViewById(R.id.imgCartProduct)
         val tvName: TextView = view.findViewById(R.id.tvCartProductName)
         val tvPrice: TextView = view.findViewById(R.id.tvCartProductPrice)
         val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
@@ -40,18 +38,6 @@ class CartAdapter(
         holder.tvName.text = product?.name ?: "Unknown Product"
         holder.tvPrice.text = String.format(Locale.getDefault(), "$%,.0f", product?.price ?: 0.0)
         holder.tvQuantity.text = item.quantity.toString()
-
-        // Carga de imagen (recursos locales)
-        val context = holder.itemView.context
-        val imageResId = if (!product?.imageUrl.isNullOrEmpty()) {
-            context.resources.getIdentifier(product?.imageUrl, "drawable", context.packageName)
-        } else 0
-        
-        if (imageResId != 0) {
-            holder.imgProduct.setImageResource(imageResId)
-        } else {
-            holder.imgProduct.setImageResource(R.drawable.logo_app)
-        }
 
         // Lógica de botones
         holder.btnPlus.setOnClickListener {
