@@ -10,7 +10,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.CartItem
 import com.example.myaple_app.data.model.Product
+import com.example.myaple_app.supabaseClient.client
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class ProductAdapter(private val productList: List<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -33,9 +42,8 @@ class ProductAdapter(private val productList: List<Product>) :
         val context = holder.itemView.context
         
         holder.tvName.text = product.name
-        holder.tvPrice.text = "$ ${product.price}"
+        holder.tvPrice.text = String.format(Locale.getDefault(), "$%,.0f", product.price)
         
-        // Carga de imagen (Revertido a la lógica original)
         val imageResId = if (!product.imageUrl.isNullOrEmpty()) {
             context.resources.getIdentifier(product.imageUrl, "drawable", context.packageName)
         } else 0
@@ -46,16 +54,65 @@ class ProductAdapter(private val productList: List<Product>) :
             holder.ivProduct.setImageResource(R.drawable.logo_app)
         }
 
-        // Acción 1: Clic en la tarjeta para ver detalles
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ProductDetailActivity::class.java)
             intent.putExtra("PRODUCT_DATA", product)
             context.startActivity(intent)
         }
 
-        // Acción 2: Clic en "Ver más" / "Agregar"
         holder.btnAdd.setOnClickListener {
-            Toast.makeText(context, "${product.name} añadido al carrito", Toast.LENGTH_SHORT).show()
+            addToCart(product, holder)
+        }
+    }
+
+    private fun addToCart(product: Product, holder: ProductViewHolder) {
+        val user = client.auth.currentUserOrNull()
+        if (user == null) {
+            Toast.makeText(holder.itemView.context, "Please log in to add items", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Usamos GlobalScope o una referencia al scope de la Activity si fuera posible, 
+        // pero para el adaptador usaremos CoroutineScope manual para este evento.
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                holder.btnAdd.isEnabled = false
+                holder.btnAdd.text = "Adding..."
+
+                withContext(Dispatchers.IO) {
+                    // Lógica: Verificar si ya existe para sumar cantidad, o insertar nuevo
+                    val existingItem = client.postgrest["cart_items"].select {
+                        filter {
+                            eq("user_id", user.id)
+                            eq("product_id", product.id ?: -1)
+                        }
+                    }.decodeSingleOrNull<CartItem>()
+
+                    if (existingItem != null) {
+                        // Update
+                        client.postgrest["cart_items"].update({
+                            set("quantity", existingItem.quantity + 1)
+                        }) {
+                            filter { eq("id", existingItem.id ?: -1) }
+                        }
+                    } else {
+                        // Insert
+                        val newItem = CartItem(
+                            user_id = user.id,
+                            product_id = product.id ?: -1,
+                            quantity = 1
+                        )
+                        client.postgrest["cart_items"].insert(newItem)
+                    }
+                }
+
+                Toast.makeText(holder.itemView.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(holder.itemView.context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } finally {
+                holder.btnAdd.isEnabled = true
+                holder.btnAdd.text = "Add to cart"
+            }
         }
     }
 
