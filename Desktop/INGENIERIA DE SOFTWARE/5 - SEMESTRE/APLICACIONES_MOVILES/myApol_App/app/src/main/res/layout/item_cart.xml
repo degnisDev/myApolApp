@@ -17,19 +17,11 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <ImageView
-            android:id="@+id/imgCartProduct"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/iphone_15_pro"
-            android:contentDescription="@null" />
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -95,6 +87,14 @@
             android:src="@drawable/ic_delete"
             app:tint="@color/error_red"
             android:contentDescription="Remove item" />
+
+        <!-- Mantenemos el ImageView oculto por si acaso para no romper el Adapter de golpe -->
+        <ImageView
+            android:id="@+id/imgCartProduct"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:contentDescription="@null" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
