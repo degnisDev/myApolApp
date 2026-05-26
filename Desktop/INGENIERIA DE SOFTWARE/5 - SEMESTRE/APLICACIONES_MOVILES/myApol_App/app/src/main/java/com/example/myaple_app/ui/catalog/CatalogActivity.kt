@@ -2,17 +2,24 @@ package com.example.myaple_app.ui.catalog
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
+import com.example.myaple_app.supabaseClient.client
 import com.example.myaple_app.ui.cart.CartActivity
+import com.example.myaple_app.ui.main.MainActivity
+import com.example.myaple_app.ui.main.ProfileActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.github.jan.supabase.auth.auth
+import kotlinx.coroutines.launch
 
 class CatalogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +33,12 @@ class CatalogActivity : AppCompatActivity() {
             insets
         }
 
-        // --- RESTAURACIÓN DE CATÁLOGO A 6 PRODUCTOS (NOTAS-c) ---
-        // Ajustamos al nuevo constructor de Product (id, name, desc, price, stock, category, imageUrl)
+        // --- BOTÓN LOGOUT ---
+        findViewById<ImageView>(R.id.btnLogout).setOnClickListener {
+            performLogout()
+        }
+
+        // --- RESTAURACIÓN DE CATÁLOGO A 6 PRODUCTOS ---
         val products = listOf(
             Product(7, "iPhone 17 Pro Max 256 GB", "El iPhone 17 Pro Max lleva la fotografía móvil al siguiente nivel con su sistema de triple cámara de 48 MP. El potente chip A19 Pro garantiza un rendimiento inigualable en IA.", 5000000.0, 10, null, "iphone17_pro_max"),
             Product(2, "iPhone 16 Pro 512 GB", "El iPhone 16 Pro incorpora el innovador botón de Control de Cámara para capturar fotos y video con precisión profesional. Chip A18 Pro y pantalla Super Retina XDR.", 3500000.0, 15, null, "iphone_16_pro_max"),
@@ -51,10 +62,25 @@ class CatalogActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Perfil en desarrollo", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, ProfileActivity::class.java))
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun performLogout() {
+        lifecycleScope.launch {
+            try {
+                client.auth.signOut()
+                Toast.makeText(this@CatalogActivity, "Logged out successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@CatalogActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            } catch (e: Exception) {
+                Toast.makeText(this@CatalogActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

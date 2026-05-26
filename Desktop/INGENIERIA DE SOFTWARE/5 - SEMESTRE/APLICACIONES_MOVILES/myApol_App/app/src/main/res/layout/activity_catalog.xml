@@ -19,6 +19,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- BOTÓN LOGOUT SUPERIOR -->
+    <ImageView
+        android:id="@+id/btnLogout"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="24dp"
+        android:src="@drawable/logout"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Logout" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
