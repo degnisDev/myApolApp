@@ -16,29 +16,31 @@ class AdminDashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_admin_dashboard)
         
+        // Ajuste de márgenes para el diseño de la pantalla
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Navegación a Gestión de Inventario
+        // Abrir la gestión de productos del inventario
         findViewById<LinearLayout>(R.id.btnStockManagement).setOnClickListener {
             val intent = Intent(this, AdminStockActivity::class.java)
             startActivity(intent)
         }
 
-        // Navegación a Gestión de Usuarios
+        // Abrir la gestión de perfiles de usuario
         findViewById<LinearLayout>(R.id.btnUserManagement).setOnClickListener {
             val intent = Intent(this, AdminUserActivity::class.java)
             startActivity(intent)
         }
 
-        // Lógica de Logout
+        // Cerrar sesión y regresar a la pantalla de login
         findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -16,15 +16,17 @@ class PaymentActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_payment)
 
+        // Ajuste de los márgenes del sistema para el diseño
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Listener para el botón de procesamiento de pago
         findViewById<AppCompatButton>(R.id.btnPayNow).setOnClickListener {
-            // Lógica de pago simulada
-            Toast.makeText(this, "Processing payment...", Toast.LENGTH_SHORT).show()
+            // Simulación del procesamiento de la transacción
+            Toast.makeText(this, "Procesando pago...", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

@@ -36,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         initViews()
         setupListeners()
 
+        // Ajuste de diseño para pantallas con notch o barras de sistema
         val mainView = findViewById<View>(R.id.main)
         mainView?.let {
             ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
@@ -64,6 +65,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    // Lógica para procesar el registro de un nuevo usuario
     private fun performRegistration() {
         val name = etFullName.text.toString().trim()
         val email = etEmail.text.toString().trim()
@@ -71,36 +73,37 @@ class RegisterActivity : AppCompatActivity() {
         val confirm = etPasswordConfirm.text.toString().trim()
         val phone = etPhone.text.toString().trim()
 
+        // Validaciones básicas de formulario
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
-            showToast("Please fill all fields")
+            showToast("Por favor completa todos los campos")
             return
         }
 
         if (password != confirm) {
-            showToast("Passwords do not match")
+            showToast("Las contraseñas no coinciden")
             return
         }
 
         if (password.length < 6) {
-            showToast("Password must be at least 6 characters")
+            showToast("La contraseña debe tener al menos 6 caracteres")
             return
         }
 
         lifecycleScope.launch {
             try {
                 btnRegister.isEnabled = false
-                btnRegister.text = "Registering..."
+                btnRegister.text = "Registrando..."
 
-                // 1. Auth SignUp
+                // Registro del usuario en el servicio de autenticación de Supabase
                 client.auth.signUpWith(Email) {
                     this.email = email
                     this.password = password
                 }
 
                 val userId = client.auth.currentUserOrNull()?.id 
-                    ?: throw Exception("User ID not found")
+                    ?: throw Exception("No se pudo obtener el ID del usuario")
 
-                // 2. Create profile with default role "client" (Step 3 of the plan)
+                // Creación del objeto de perfil con el rol predeterminado 'client'
                 val newUserProfile = User(
                     id = userId,
                     name = name,
@@ -109,14 +112,14 @@ class RegisterActivity : AppCompatActivity() {
                     role = "client"
                 )
 
-                // 3. Save to database
+                // Persistencia del perfil de usuario en la tabla 'profiles'
                 client.postgrest["profiles"].insert(newUserProfile)
 
-                showToast("Registration successful!")
+                showToast("¡Registro exitoso!")
                 finish()
 
             } catch (e: Exception) {
-                showToast("Error: ${e.message}")
+                showToast("Error en el registro: ${e.message}")
                 btnRegister.isEnabled = true
                 btnRegister.text = "SIGN UP"
             }

@@ -77,39 +77,39 @@ class MainActivity : AppCompatActivity() {
                 btnLogin.isEnabled = false
                 btnLogin.text = "Iniciando sesión..."
 
-                // 1. Autenticación en Supabase
+                // Autenticación con el servicio de Supabase
                 client.auth.signInWith(Email) {
                     this.email = email
                     this.password = password
                 }
 
-                // 2. Obtener el ID del usuario actual
+                // Recuperamos el ID del usuario autenticado
                 val userId = client.auth.currentUserOrNull()?.id 
-                    ?: throw Exception("User session not found")
+                    ?: throw Exception("No se encontró la sesión del usuario")
 
-                // 3. Consultar el perfil para verificar el rol (Punto #4 del plan)
+                // Consultamos el perfil para determinar el rol y dirigir a la vista correspondiente
                 val userProfile = client.postgrest["profiles"].select {
                     filter {
                         eq("id", userId)
                     }
                 }.decodeSingle<User>()
 
-                // 4. Enrutamiento según el Rol (Punto #1 y #4 del plan)
+                // Redirección basada en el rol del perfil
                 when (userProfile.role) {
                     "admin" -> {
-                        showToast("You are an administrator")
+                        showToast("Acceso como administrador")
                         val intent = Intent(this@MainActivity, AdminDashboardActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     "seller" -> {
-                        showToast("You are a seller")
+                        showToast("Acceso como vendedor")
                         val intent = Intent(this@MainActivity, SellerDashboardActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     else -> {
-                        showToast("Welcome!")
+                        showToast("¡Bienvenido!")
                         val intent = Intent(this@MainActivity, CatalogActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)

@@ -44,6 +44,7 @@ class ProductAdapter(private val productList: List<Product>) :
         holder.tvName.text = product.name
         holder.tvPrice.text = String.format(Locale.getDefault(), "$%,.0f", product.price)
         
+        // Carga de la imagen del producto desde los recursos locales del proyecto
         val imageResId = if (!product.imageUrl.isNullOrEmpty()) {
             context.resources.getIdentifier(product.imageUrl, "drawable", context.packageName)
         } else 0
@@ -54,33 +55,35 @@ class ProductAdapter(private val productList: List<Product>) :
             holder.ivProduct.setImageResource(R.drawable.logo_app)
         }
 
+        // Evento para visualizar el detalle completo del producto
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ProductDetailActivity::class.java)
             intent.putExtra("PRODUCT_DATA", product)
             context.startActivity(intent)
         }
 
+        // Evento para añadir el producto al carrito de compras
         holder.btnAdd.setOnClickListener {
             addToCart(product, holder)
         }
     }
 
+    // Lógica para gestionar la inserción o actualización de productos en el carrito (Supabase)
     private fun addToCart(product: Product, holder: ProductViewHolder) {
         val user = client.auth.currentUserOrNull()
         if (user == null) {
-            Toast.makeText(holder.itemView.context, "Please log in to add items", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.itemView.context, "Inicia sesión para añadir productos", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Usamos GlobalScope o una referencia al scope de la Activity si fuera posible, 
-        // pero para el adaptador usaremos CoroutineScope manual para este evento.
+        // Ejecución en un hilo secundario para no bloquear la interfaz de usuario
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 holder.btnAdd.isEnabled = false
-                holder.btnAdd.text = "Adding..."
+                holder.btnAdd.text = "Añadiendo..."
 
                 withContext(Dispatchers.IO) {
-                    // Lógica: Verificar si ya existe para sumar cantidad, o insertar nuevo
+                    // Verificamos si el producto ya existe en el carrito del usuario
                     val existingItem = client.postgrest["cart_items"].select {
                         filter {
                             eq("user_id", user.id)
@@ -89,14 +92,14 @@ class ProductAdapter(private val productList: List<Product>) :
                     }.decodeSingleOrNull<CartItem>()
 
                     if (existingItem != null) {
-                        // Update
+                        // Si ya existe, incrementamos la cantidad actual
                         client.postgrest["cart_items"].update({
                             set("quantity", existingItem.quantity + 1)
                         }) {
                             filter { eq("id", existingItem.id ?: -1) }
                         }
                     } else {
-                        // Insert
+                        // Si es nuevo, insertamos el registro con cantidad inicial de 1
                         val newItem = CartItem(
                             user_id = user.id,
                             product_id = product.id ?: -1,
@@ -106,7 +109,7 @@ class ProductAdapter(private val productList: List<Product>) :
                     }
                 }
 
-                Toast.makeText(holder.itemView.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.itemView.context, "${product.name} añadido al carrito", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Toast.makeText(holder.itemView.context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {

@@ -35,11 +35,12 @@ class CartAdapter(
         val item = cartList[position]
         val product = item.product
 
-        holder.tvName.text = product?.name ?: "Unknown Product"
+        // Mostramos el nombre y precio formateado del producto vinculado
+        holder.tvName.text = product?.name ?: "Producto no identificado"
         holder.tvPrice.text = String.format(Locale.getDefault(), "$%,.0f", product?.price ?: 0.0)
         holder.tvQuantity.text = item.quantity.toString()
 
-        // Lógica de botones
+        // Configuración de los controles para incrementar o disminuir la cantidad
         holder.btnPlus.setOnClickListener {
             onQuantityChanged(item, item.quantity + 1)
         }
@@ -50,6 +51,7 @@ class CartAdapter(
             }
         }
 
+        // Acción para eliminar el ítem del carrito
         holder.btnDelete.setOnClickListener {
             onDeleteItem(item)
         }
@@ -57,6 +59,7 @@ class CartAdapter(
 
     override fun getItemCount(): Int = cartList.size
 
+    // Método para refrescar la lista de productos en el carrito tras una actualización
     fun updateData(newList: List<CartItem>) {
         this.cartList = newList
         notifyDataSetChanged()

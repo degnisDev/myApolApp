@@ -17,13 +17,14 @@ class SellerDashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_seller_dashboard)
         
+        // Ajuste de los márgenes del sistema para el diseño de la actividad
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Logout
+        // Configuración de la acción de salida para regresar al inicio de sesión
         findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

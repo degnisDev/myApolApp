@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -60,11 +59,13 @@ class AdminStockActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
 
+        // Botón para abrir el formulario de creación de producto
         findViewById<FloatingActionButton>(R.id.fabAddProduct).setOnClickListener {
             val intent = Intent(this, AdminProductDetailActivity::class.java)
             startActivity(intent)
         }
 
+        // Configuración de edición para el producto seleccionado
         btnEditTop.setOnClickListener {
             selectedProduct?.let { product ->
                 val intent = Intent(this, AdminProductDetailActivity::class.java)
@@ -73,6 +74,7 @@ class AdminStockActivity : AppCompatActivity() {
             }
         }
 
+        // Configuración de eliminación para el producto seleccionado
         btnDeleteTop.setOnClickListener {
             selectedProduct?.let { product ->
                 showDeleteConfirmation(product)
@@ -82,10 +84,10 @@ class AdminStockActivity : AppCompatActivity() {
 
     private fun showDeleteConfirmation(product: Product) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Delete Product")
-            .setMessage("Are you sure you want to delete ${product.name}? This action cannot be undone.")
-            .setNegativeButton("Cancel", null)
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle("Eliminar Producto")
+            .setMessage("¿Estás seguro de que deseas eliminar ${product.name}? Esta acción no se puede deshacer.")
+            .setNegativeButton("Cancelar", null)
+            .setPositiveButton("Eliminar") { _, _ ->
                 deleteProductFromSupabase(product)
             }
             .show()
@@ -102,14 +104,14 @@ class AdminStockActivity : AppCompatActivity() {
                     }
                 }
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "${product.name} deleted", Toast.LENGTH_SHORT).show()
-                    fetchProducts() // Recargar lista
+                    Toast.makeText(this@AdminStockActivity, "Producto eliminado", Toast.LENGTH_SHORT).show()
+                    fetchProducts() // Actualizamos la lista tras borrar
                     selectedProduct = null
                     toggleActionButtons(false)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Error deleting: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminStockActivity, "Error al eliminar: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -126,12 +128,14 @@ class AdminStockActivity : AppCompatActivity() {
         rvStock.adapter = adapter
     }
 
+    // Control visual de los botones de acción en la barra superior
     private fun toggleActionButtons(isVisible: Boolean) {
         val visibility = if (isVisible) View.VISIBLE else View.GONE
         btnEditTop.visibility = visibility
         btnDeleteTop.visibility = visibility
     }
 
+    // Consulta de productos a Supabase ordenados por ID
     private fun fetchProducts() {
         lifecycleScope.launch {
             try {
@@ -149,12 +153,13 @@ class AdminStockActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Error loading: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminStockActivity, "Error al cargar stock: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
+    // Cálculo de los totales del inventario (unidades y valor monetario)
     private fun updateSummary(products: List<Product>) {
         val totalUnits = products.sumOf { it.stock }
         val totalValue = products.sumOf { it.price * it.stock }
@@ -165,7 +170,7 @@ class AdminStockActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        fetchProducts()
+        fetchProducts() // Refrescamos datos al volver de otras pantallas
         selectedProduct = null
         toggleActionButtons(false)
     }

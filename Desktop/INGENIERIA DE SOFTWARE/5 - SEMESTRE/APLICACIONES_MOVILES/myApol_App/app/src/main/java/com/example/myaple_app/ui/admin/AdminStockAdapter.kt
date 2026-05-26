@@ -15,6 +15,7 @@ class AdminStockAdapter(
     private val onProductSelected: (Product?) -> Unit
 ) : RecyclerView.Adapter<AdminStockAdapter.StockViewHolder>() {
 
+    // Variable para rastrear la posición del producto seleccionado en la lista
     private var selectedPosition: Int = RecyclerView.NO_POSITION
 
     class StockViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -41,28 +42,31 @@ class AdminStockAdapter(
         holder.tvPrice.text = "$${String.format("%,.0f", product.price)}"
         holder.tvCategory.text = product.category ?: "N/A"
 
-        // Lógica de Selección Visual
+        // Aplicamos un resaltado visual si el producto actual es el seleccionado
         if (selectedPosition == position) {
-            holder.card.setCardBackgroundColor(Color.parseColor("#40FFFFFF")) // Resaltado
+            holder.card.setCardBackgroundColor(Color.parseColor("#40FFFFFF")) 
         } else {
-            holder.card.setCardBackgroundColor(Color.parseColor("#20FFFFFF")) // Normal
+            holder.card.setCardBackgroundColor(Color.parseColor("#20FFFFFF"))
         }
 
         holder.itemView.setOnClickListener {
             val previousSelected = selectedPosition
             if (selectedPosition == position) {
-                // Deseleccionar si toca el mismo
+                // Si se toca el mismo producto, se deselecciona
                 selectedPosition = RecyclerView.NO_POSITION
                 onProductSelected(null)
             } else {
+                // Marcamos la nueva posición como seleccionada
                 selectedPosition = position
                 onProductSelected(product)
             }
+            // Notificamos cambios para refrescar el color de fondo de los items afectados
             notifyItemChanged(previousSelected)
             notifyItemChanged(selectedPosition)
         }
     }
 
+    // Función para actualizar la lista de productos y resetear la selección
     fun updateData(newList: List<Product>) {
         this.productList = newList
         this.selectedPosition = RecyclerView.NO_POSITION

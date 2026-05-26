@@ -2,7 +2,6 @@ package com.example.myaple_app.ui.admin
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -40,7 +39,7 @@ class AdminUserActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
         
-        // Habilitamos el botón "+" para crear usuarios (Punto 4.3 completo)
+        // Configuración del botón para registrar nuevos usuarios desde el panel administrativo
         findViewById<FloatingActionButton>(R.id.fabAddUser).setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
@@ -49,8 +48,7 @@ class AdminUserActivity : AppCompatActivity() {
         setupRecyclerView()
     }
 
-    // Usamos onResume para que la lista se actualice automáticamente 
-    // cuando el Admin regrese de la pantalla de Registro
+    // Recargamos la lista al volver a la actividad para reflejar posibles cambios o nuevos registros
     override fun onResume() {
         super.onResume()
         fetchUsers()
@@ -67,6 +65,7 @@ class AdminUserActivity : AppCompatActivity() {
         rvUsers.adapter = adapter
     }
 
+    // Obtención de todos los perfiles de usuario desde la tabla 'profiles' en Supabase
     private fun fetchUsers() {
         lifecycleScope.launch {
             try {
@@ -74,24 +73,24 @@ class AdminUserActivity : AppCompatActivity() {
                 userList.clear()
                 userList.addAll(users)
                 adapter.updateData(userList)
-                Log.d("ADMIN_CRUD", "Fetch: ${users.size} users found")
             } catch (e: Exception) {
-                Log.e("ADMIN_CRUD", "Fetch failed", e)
-                showToast("Error loading: ${e.message}")
+                showToast("Error al cargar usuarios: ${e.message}")
             }
         }
     }
 
+    // Diálogo de selección para la actualización de roles de usuario
     private fun showRoleDialog(user: User) {
         val roles = arrayOf("admin", "seller", "client")
         AlertDialog.Builder(this)
-            .setTitle("Change role for ${user.name}")
+            .setTitle("Cambiar rol para ${user.name}")
             .setItems(roles) { _, which ->
                 updateUserRole(user, roles[which])
             }
             .show()
     }
 
+    // Actualización del campo 'role' en la base de datos remota
     private fun updateUserRole(user: User, newRole: String) {
         lifecycleScope.launch {
             try {
@@ -99,7 +98,7 @@ class AdminUserActivity : AppCompatActivity() {
                 client.postgrest["profiles"].update(updateData) {
                     filter { eq("id", user.id) }
                 }
-                showToast("Role updated to $newRole")
+                showToast("Rol actualizado a $newRole")
                 delay(800)
                 fetchUsers()
             } catch (e: Exception) {
@@ -110,28 +109,27 @@ class AdminUserActivity : AppCompatActivity() {
 
     private fun showDeleteConfirmation(user: User) {
         AlertDialog.Builder(this)
-            .setTitle("Delete User")
-            .setMessage("Remove ${user.name} permanently?")
-            .setPositiveButton("Delete") { _, _ -> deleteUser(user) }
-            .setNegativeButton("Cancel", null)
+            .setTitle("Eliminar Usuario")
+            .setMessage("¿Estás seguro de que deseas eliminar a ${user.name} permanentemente?")
+            .setPositiveButton("Eliminar") { _, _ -> deleteUser(user) }
+            .setNegativeButton("Cancelar", null)
             .show()
     }
 
+    // Eliminación lógica/física del perfil de usuario en la base de datos
     private fun deleteUser(user: User) {
         lifecycleScope.launch {
             try {
-                Log.d("ADMIN_CRUD", "Deleting user ID: ${user.id}")
                 client.postgrest["profiles"].delete {
                     filter { eq("id", user.id) }
                 }
-                showToast("User deleted from DB")
+                showToast("Usuario eliminado correctamente")
                 userList.remove(user)
                 adapter.updateData(userList)
                 delay(500)
                 fetchUsers()
             } catch (e: Exception) {
-                Log.e("ADMIN_CRUD", "Delete failed", e)
-                showToast("Error deleting: ${e.message}")
+                showToast("Error al eliminar: ${e.message}")
             }
         }
     }

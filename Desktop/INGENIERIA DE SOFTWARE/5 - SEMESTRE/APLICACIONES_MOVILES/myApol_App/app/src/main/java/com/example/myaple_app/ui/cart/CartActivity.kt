@@ -39,6 +39,7 @@ class CartActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_cart)
 
+        // Validamos la sesión y el rol del usuario antes de inicializar la vista
         checkUserRoleAndInitialize()
     }
 
@@ -51,6 +52,7 @@ class CartActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
+                // Consulta del perfil en Supabase para validar permisos de acceso
                 val profile = withContext(Dispatchers.IO) {
                     client.postgrest["profiles"].select {
                         filter { eq("id", user.id) }
@@ -58,13 +60,15 @@ class CartActivity : AppCompatActivity() {
                 }
 
                 if (profile.role == "client") {
+                    // Si el usuario es un cliente, cargamos los componentes del carrito
                     setupUI()
                     setupRecyclerView()
                     setupBottomNavigation()
                     fetchCartItems()
                 } else {
+                    // Restricción de acceso para otros roles administrativos
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@CartActivity, "Access denied: Clients only", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@CartActivity, "Acceso restringido: Solo para clientes", Toast.LENGTH_LONG).show()
                         finish()
                     }
                 }
@@ -87,7 +91,7 @@ class CartActivity : AppCompatActivity() {
             if (cartItems.isNotEmpty()) {
                 startActivity(Intent(this, PaymentActivity::class.java))
             } else {
-                Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -96,6 +100,7 @@ class CartActivity : AppCompatActivity() {
         val rvCart = findViewById<RecyclerView>(R.id.rvCartItems)
         rvCart.layoutManager = LinearLayoutManager(this)
         
+        // Configuración del adaptador con funciones de retrollamada para cambios de cantidad o eliminación
         adapter = CartAdapter(
             cartList = emptyList(),
             onQuantityChanged = { item, newQuantity ->
@@ -114,8 +119,7 @@ class CartActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    // LLAMADA CLAVE: Realizamos un JOIN con la tabla products
-                    // Usamos el alias 'product' para que coincida con el nombre en CartItem.kt
+                    // Realizamos una consulta vinculada para obtener los detalles de los productos en el carrito
                     client.postgrest["cart_items"].select(Columns.raw("*, product:products(*)")) {
                         filter { eq("user_id", user.id) }
                     }.decodeList<CartItem>()
@@ -136,16 +140,17 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
+    // Lógica para sumarizar el precio total de todos los productos seleccionados
     private fun calculateTotal() {
         var total = 0.0
         cartItems.forEach { item ->
-            // Ahora item.product ya no será null, traerá los datos de Supabase
             val price = item.product?.price ?: 0.0
             total += price * item.quantity
         }
         tvTotalValue.text = String.format(Locale.getDefault(), "$%,.0f", total)
     }
 
+    // Actualización asíncrona de la cantidad de un ítem en la base de datos remota
     private fun updateQuantityInSupabase(item: CartItem, newQuantity: Int) {
         lifecycleScope.launch {
             try {
@@ -158,11 +163,12 @@ class CartActivity : AppCompatActivity() {
                 }
                 fetchCartItems()
             } catch (e: Exception) {
-                Toast.makeText(this@CartActivity, "Update failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CartActivity, "Error al actualizar cantidad", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    // Eliminación de un registro específico del carrito en Supabase
     private fun deleteItemFromSupabase(item: CartItem) {
         lifecycleScope.launch {
             try {
@@ -173,7 +179,7 @@ class CartActivity : AppCompatActivity() {
                 }
                 fetchCartItems()
             } catch (e: Exception) {
-                Toast.makeText(this@CartActivity, "Delete failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CartActivity, "Error al eliminar producto", Toast.LENGTH_SHORT).show()
             }
         }
     }
