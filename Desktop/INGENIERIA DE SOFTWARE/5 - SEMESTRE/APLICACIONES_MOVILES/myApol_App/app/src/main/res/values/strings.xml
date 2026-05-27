@@ -163,4 +163,5 @@
     <string name="bonuses_value_demo">3 Units - $ 1.500.000</string>
     <string name="returns_value_demo">2 Units - $ 3.200.000</string>
     <string name="stock">Stock</string>
+    <string name="todo">TODO</string>
 </resources>

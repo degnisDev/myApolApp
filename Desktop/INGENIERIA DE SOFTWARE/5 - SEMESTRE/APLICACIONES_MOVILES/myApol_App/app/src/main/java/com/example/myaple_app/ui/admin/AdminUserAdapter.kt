@@ -1,5 +1,6 @@
 package com.example.myaple_app.ui.admin
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class AdminUserAdapter(
     override fun getItemCount(): Int = userList.size
 
     // Actualización de la lista de usuarios tras operaciones CRUD
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<User>) {
         this.userList = newList
         notifyDataSetChanged()

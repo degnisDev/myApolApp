@@ -6,8 +6,7 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 
 /**
- * Configuración centralizada del cliente de Supabase.
- * Proporciona acceso a los servicios de base de datos (Postgrest) y autenticación (Auth).
+ * Este lo creamos para vincular nuestro proyecto con la base de datos de Supabase.
  */
 object supabaseClient {
     val client = createSupabaseClient(

@@ -1,5 +1,6 @@
 package com.example.myaple_app.ui.admin
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myaple_app.R
 import com.example.myaple_app.data.model.Product
+import androidx.core.graphics.toColorInt
 
 class AdminStockAdapter(
     private var productList: List<Product>,
@@ -33,7 +35,7 @@ class AdminStockAdapter(
         return StockViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StockViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val product = productList[position]
         val context = holder.itemView.context
         
@@ -45,9 +47,9 @@ class AdminStockAdapter(
 
         // Aplicamos un resaltado visual si el producto actual es el seleccionado
         if (selectedPosition == position) {
-            holder.card.setCardBackgroundColor(Color.parseColor("#40FFFFFF")) 
+            holder.card.setCardBackgroundColor("#40FFFFFF".toColorInt())
         } else {
-            holder.card.setCardBackgroundColor(Color.parseColor("#20FFFFFF"))
+            holder.card.setCardBackgroundColor("#20FFFFFF".toColorInt())
         }
 
         holder.itemView.setOnClickListener {
@@ -68,6 +70,7 @@ class AdminStockAdapter(
     }
 
     // Función para actualizar la lista de productos y resetear la selección
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<Product>) {
         this.productList = newList
         this.selectedPosition = RecyclerView.NO_POSITION

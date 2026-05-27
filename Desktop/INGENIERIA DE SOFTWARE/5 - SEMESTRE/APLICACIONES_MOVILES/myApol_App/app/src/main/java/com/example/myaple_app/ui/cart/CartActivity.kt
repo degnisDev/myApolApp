@@ -140,7 +140,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    // Lógica para sumarizar el precio total de todos los productos seleccionados
+    // Lógica para sumar el precio total de todos los productos seleccionados
     private fun calculateTotal() {
         var total = 0.0
         cartItems.forEach { item ->

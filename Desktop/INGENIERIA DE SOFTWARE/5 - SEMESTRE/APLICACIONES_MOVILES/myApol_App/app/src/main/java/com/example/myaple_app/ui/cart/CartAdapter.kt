@@ -1,5 +1,6 @@
 package com.example.myaple_app.ui.cart
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +60,8 @@ class CartAdapter(
 
     override fun getItemCount(): Int = cartList.size
 
-    // Método para refrescar la lista de productos en el carrito tras una actualización
+//    Metodo para refrescar la lista despues de una actualizacion
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<CartItem>) {
         this.cartList = newList
         notifyDataSetChanged()

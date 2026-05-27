@@ -27,7 +27,7 @@ class ProductDetailActivity : AppCompatActivity() {
             insets
         }
 
-        // Recuperación segura del objeto Product (compatible con SDK 33+)
+        // Recuperación segura del objeto Product
         val product = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getSerializableExtra("PRODUCT_DATA", Product::class.java)
         } else {
@@ -50,7 +50,7 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    // Método para vincular los datos del producto con los elementos de la interfaz
+    // Metodo para traer los datos del producto y mostrarlos en la vista
     private fun displayProductDetails(product: Product) {
         val imgProduct: ImageView = findViewById(R.id.imgProductDetail)
         val tvName: TextView = findViewById(R.id.tvProductNameDetail)
