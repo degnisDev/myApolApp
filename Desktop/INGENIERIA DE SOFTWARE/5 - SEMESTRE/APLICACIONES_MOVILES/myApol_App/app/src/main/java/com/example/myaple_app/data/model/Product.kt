@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Product(
-    val id: Long? = null, // BigInt en Supabase
+    val id: Long? = null,
     val name: String,
     val description: String? = null,
     val price: Double,

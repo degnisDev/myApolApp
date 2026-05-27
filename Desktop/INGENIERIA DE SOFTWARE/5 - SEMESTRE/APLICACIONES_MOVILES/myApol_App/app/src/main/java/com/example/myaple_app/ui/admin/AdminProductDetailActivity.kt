@@ -62,7 +62,7 @@ class AdminProductDetailActivity : AppCompatActivity() {
     }
 
     private fun handleIntentData() {
-        // Recuperamos el producto enviado desde la lista de stock (soporte para SDK 33+)
+        // Recuperamos el producto enviado desde la lista de stock
         currentProduct = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getSerializableExtra("PRODUCT_DATA", Product::class.java)
         } else {

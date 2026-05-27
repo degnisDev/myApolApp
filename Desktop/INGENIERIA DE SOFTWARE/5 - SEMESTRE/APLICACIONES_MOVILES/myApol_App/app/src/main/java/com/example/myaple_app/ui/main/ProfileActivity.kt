@@ -32,7 +32,7 @@ class ProfileActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvUserRole).text = profile.role
             } catch (e: Exception) {
                 findViewById<TextView>(R.id.tvUserEmail).text = user?.email
-                findViewById<TextView>(R.id.tvUserRole).text = "client"
+                findViewById<TextView>(R.id.tvUserRole).text = getString(R.string.client)
             }
         }
 

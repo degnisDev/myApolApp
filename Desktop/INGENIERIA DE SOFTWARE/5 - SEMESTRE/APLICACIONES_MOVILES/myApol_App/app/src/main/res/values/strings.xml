@@ -17,7 +17,7 @@
     <string name="zero">0</string>
     <string name="zero_currency">$0</string>
 
-    <!-- UI Placeholders & Demo Data (Restoring missing keys from errors) -->
+    <!-- Textos para la seccion de administracion -->
     <string name="admin_name_placeholder">Geovany Quevedo</string>
     <string name="admin_email_placeholder">quevedogeovany10@gmail.com</string>
     <string name="add_product">Add Product</string>
@@ -28,7 +28,7 @@
     <string name="product_name_placeholder">Product Name</string>
     <string name="price_placeholder">$ 0.00</string>
 
-    <!-- Login -->
+    <!-- Textos para la seccion de Login -->
     <string name="welcome_back">Welcome back</string>
     <string name="sign_in_continue">Sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
@@ -45,7 +45,7 @@
     <string name="access_seller">Access as Seller</string>
     <string name="welcome_msg">Welcome!</string>
 
-    <!-- Register -->
+    <!-- Textos para la seccion de Registro -->
     <string name="create_account">Create Your Account</string>
     <string name="full_name">Full Name</string>
     <string name="phone">Phone</string>
@@ -58,7 +58,7 @@
     <string name="error_missing_fields_reg">Please fill in all fields</string>
     <string name="error_reg_id">Could not get user ID</string>
 
-    <!-- Catalog -->
+    <!-- Textos para la seccion de Catalogo -->
     <string name="nav_home">Home</string>
     <string name="nav_cart">Cart</string>
     <string name="nav_profile">Profile</string>
@@ -68,7 +68,7 @@
     <string name="product_added_msg">%1$s added to cart</string>
     <string name="login_required_add_cart">Please log in to add products</string>
 
-    <!-- Product Catalog Demo Data -->
+    <!-- Textos para la seccion de detalle de productos -->
     <string name="product_iphone17_name">iPhone 17 Pro Max 256 GB</string>
     <string name="product_iphone17_desc">The iPhone 17 Pro Max features the A19 Pro chip and an advanced camera system.</string>
     <string name="product_iphone16_name">iPhone 16 Pro 512 GB</string>
@@ -82,7 +82,7 @@
     <string name="product_airpods_name">AirPods Pro 2nd Gen</string>
     <string name="product_airpods_desc">Offer twice the active noise cancellation and personalized spatial audio.</string>
 
-    <!-- Profile -->
+    <!-- Textos para la seccion de perfil -->
     <string name="profile_tittle">My Profile</string>
     <string name="my_orders">My Orders</string>
     <string name="shipping_address">Shipping Address</string>
@@ -93,7 +93,7 @@
     <string name="error_logout">Error logging out</string>
     <string name="logout_success">Logged out successfully</string>
 
-    <!-- Cart -->
+    <!-- Textos para la seccion de carrito de compras -->
     <string name="cart_title">My Cart</string>
     <string name="checkout">Checkout</string>
     <string name="total_label">Total:</string>
@@ -105,7 +105,7 @@
     <string name="increase_quantity">Increase quantity</string>
     <string name="decrease_quantity">Decrease quantity</string>
 
-    <!-- Payment -->
+    <!-- Textos para la seccion de pagos -->
     <string name="payment_title">Checkout</string>
     <string name="payment_method">Select Payment Method</string>
     <string name="credit_card">Credit Card</string>
@@ -115,7 +115,7 @@
     <string name="payment_success">Payment Successful! Thank you for choosing myApol.</string>
     <string name="processing_payment">Processing payment...</string>
 
-    <!-- Admin -->
+    <!-- Textos para la seccion de stock product -->
     <string name="stock_management">Stock Management</string>
     <string name="user_management">User Management</string>
     <string name="statistics">Statistics</string>
@@ -144,7 +144,7 @@
     <string name="error_fetch_stock">Error loading stock: %1$s</string>
     <string name="role_format">Role: %1$s</string>
 
-    <!-- User Management -->
+    <!-- Textos para la seccion de administracion de usuarios -->
     <string name="error_loading_users">Error loading users: %1$s</string>
     <string name="change_role_title">Change role for %1$s</string>
     <string name="role_updated_success">Role updated to %1$s</string>
@@ -152,7 +152,7 @@
     <string name="delete_user_confirmation">Are you sure you want to delete %1$s permanently?</string>
     <string name="user_deleted_success">User deleted successfully</string>
 
-    <!-- Seller Panel -->
+    <!-- Textos para la seccion de vendedor estadsticas -->
     <string name="seller_name_placeholder">Carlos Seller</string>
     <string name="seller_email_placeholder">carlos.seller@myapol.com</string>
     <string name="monthly_performance">MONTHLY PERFORMANCE</string>

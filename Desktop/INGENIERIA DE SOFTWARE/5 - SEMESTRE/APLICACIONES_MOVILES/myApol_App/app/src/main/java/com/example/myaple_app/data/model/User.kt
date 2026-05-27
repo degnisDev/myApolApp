@@ -8,5 +8,5 @@ data class User(
     val name: String,
     val email: String,
     val phone: String,
-    val role: String = "client" // Nuevo campo para control de acceso
+    val role: String = "client"
 ) : java.io.Serializable
