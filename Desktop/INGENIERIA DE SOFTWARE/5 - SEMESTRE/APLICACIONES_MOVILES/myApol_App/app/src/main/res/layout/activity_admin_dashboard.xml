@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_bg"
-    tools:context=".AdminDashboardActivity">
+    tools:context=".ui.admin.AdminDashboardActivity">
 
     <!-- IMAGEN DE FONDO -->
     <ImageView
@@ -32,7 +32,6 @@
         android:padding="32dp"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        imagen persona-->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -57,6 +56,19 @@
             android:text="@string/admin_email_placeholder"
             android:textColor="@color/white"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvAdminRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="#40FFFFFF"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="2dp"
+            android:text="admin"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textAllCaps="true" />
     </LinearLayout>
 
     <!-- PANEL DE CONTROL -->

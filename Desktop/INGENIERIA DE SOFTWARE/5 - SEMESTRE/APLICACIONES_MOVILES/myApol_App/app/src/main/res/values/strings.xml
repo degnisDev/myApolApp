@@ -36,6 +36,7 @@
     <string name="no_account">Don\'t have an account? </string>
     <string name="admin">Admin</string>
     <string name="seller">Seller</string>
+    <string name="client">Client</string>
     <string name="login_admin">Login as Admin</string>
     <string name="login_seller">Login as Seller</string>
     <string name="logging_in">Logging in...</string>

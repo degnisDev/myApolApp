@@ -3,55 +3,47 @@ package com.example.myaple_app.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.User
 import com.example.myaple_app.supabaseClient.client
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 
 class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
-        // Configuración de insets para el diseño a pantalla completa
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        setupListeners()
-    }
-
-    private fun setupListeners() {
-        // Listener para la acción de logout en el panel de perfil
-        findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
-            performLogout()
-        }
-    }
-
-    // Lógica para finalizar la sesión del usuario en Supabase y redirigir al login
-    private fun performLogout() {
+        // 1. Traer datos reales
+        val user = client.auth.currentUserOrNull()
         lifecycleScope.launch {
             try {
-                client.auth.signOut()
-                Toast.makeText(this@ProfileActivity, getString(R.string.session_finished), Toast.LENGTH_SHORT).show()
+                val profile = client.postgrest["profiles"].select {
+                    filter { eq("id", user?.id ?: "") }
+                }.decodeSingle<User>()
                 
-                // Redirección a la pantalla principal y limpieza del stack de actividades
+                findViewById<TextView>(R.id.tvUserName).text = profile.name
+                findViewById<TextView>(R.id.tvUserEmail).text = profile.email
+                findViewById<TextView>(R.id.tvUserRole).text = profile.role
+            } catch (e: Exception) {
+                findViewById<TextView>(R.id.tvUserEmail).text = user?.email
+                findViewById<TextView>(R.id.tvUserRole).text = "client"
+            }
+        }
+
+        // 2. Botón Logout
+        findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
+            lifecycleScope.launch {
+                client.auth.signOut()
                 val intent = Intent(this@ProfileActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()
-            } catch (e: Exception) {
-                Toast.makeText(this@ProfileActivity, getString(R.string.error_logout), Toast.LENGTH_SHORT).show()
             }
         }
     }

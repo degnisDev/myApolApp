@@ -3,12 +3,19 @@ package com.example.myaple_app.ui.admin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.myaple_app.R
+import com.example.myaple_app.data.model.User
+import com.example.myaple_app.supabaseClient.client
 import com.example.myaple_app.ui.main.MainActivity
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.launch
 
 class AdminDashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +28,23 @@ class AdminDashboardActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        // 1. Traer datos reales del administrador
+        val user = client.auth.currentUserOrNull()
+        lifecycleScope.launch {
+            try {
+                val profile = client.postgrest["profiles"].select {
+                    filter { eq("id", user?.id ?: "") }
+                }.decodeSingle<User>()
+                
+                findViewById<TextView>(R.id.tvAdminName).text = profile.name
+                findViewById<TextView>(R.id.tvAdminEmail).text = profile.email
+                findViewById<TextView>(R.id.tvAdminRole).text = profile.role
+            } catch (e: Exception) {
+                findViewById<TextView>(R.id.tvAdminEmail).text = user?.email
+                findViewById<TextView>(R.id.tvAdminRole).text = getString(R.string.admin)
+            }
         }
 
         // Abrir la gestión de productos del inventario
@@ -37,10 +61,13 @@ class AdminDashboardActivity : AppCompatActivity() {
 
         // Cerrar sesión y regresar a la pantalla de login
         findViewById<LinearLayout>(R.id.btnLogoutAction).setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+            lifecycleScope.launch {
+                client.auth.signOut()
+                val intent = Intent(this@AdminDashboardActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }
