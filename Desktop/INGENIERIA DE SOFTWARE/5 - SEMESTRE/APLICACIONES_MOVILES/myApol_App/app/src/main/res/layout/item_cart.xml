@@ -89,7 +89,7 @@
             app:tint="@color/error_red"
             android:contentDescription="@string/remove_item" />
 
-        <!-- Mantenemos el ImageView oculto por si acaso para no romper el Adapter de golpe -->
+        <!-- Mantenemos el ImageView oculto por si acaso para no romper el codigo que tenemos hasta ahora -->
         <ImageView
             android:id="@+id/imgCartProduct"
             android:layout_width="0dp"
