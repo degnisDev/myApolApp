@@ -35,12 +35,13 @@ class AdminStockAdapter(
 
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
         val product = productList[position]
+        val context = holder.itemView.context
         
         holder.tvId.text = product.id.toString()
         holder.tvName.text = product.name
         holder.tvStock.text = product.stock.toString()
-        holder.tvPrice.text = "$${String.format("%,.0f", product.price)}"
-        holder.tvCategory.text = product.category ?: "N/A"
+        holder.tvPrice.text = String.format(context.getString(R.string.price_format_currency), product.price)
+        holder.tvCategory.text = product.category ?: context.getString(R.string.not_available)
 
         // Aplicamos un resaltado visual si el producto actual es el seleccionado
         if (selectedPosition == position) {

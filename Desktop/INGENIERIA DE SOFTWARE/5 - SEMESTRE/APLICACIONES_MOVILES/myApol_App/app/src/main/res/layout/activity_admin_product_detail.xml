@@ -45,14 +45,14 @@
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground"
                 app:tint="@color/white"
-                android:contentDescription="Back" />
+                android:contentDescription="@string/back" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Product Detail"
+                android:text="@string/product_detail"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name"
+                android:text="@string/product_name_hint"
                 android:textColor="@color/text_hint"
                 android:layout_marginBottom="8dp"/>
 
@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="e.g. iPhone 17 Pro Max"
+                android:hint="@string/product_name_hint"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_hint"
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price"
+                        android:text="@string/price_label"
                         android:textColor="@color/text_hint"
                         android:layout_marginBottom="8dp"/>
                     <EditText
@@ -109,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@drawable/bg_input_field"
-                        android:hint="0.00"
+                        android:hint="@string/zero_currency"
                         android:paddingHorizontal="16dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_hint"
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Stock"
+                        android:text="@string/stock_label"
                         android:textColor="@color/text_hint"
                         android:layout_marginBottom="8dp"/>
                     <EditText
@@ -134,7 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@drawable/bg_input_field"
-                        android:hint="0"
+                        android:hint="@string/zero"
                         android:paddingHorizontal="16dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_hint"
@@ -146,7 +146,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category"
+                android:text="@string/product_category_hint"
                 android:textColor="@color/text_hint"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"/>
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="Select category"
+                android:hint="@string/select_category"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_hint"
@@ -165,7 +165,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/product_description_hint"
                 android:textColor="@color/text_hint"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"/>
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="Product details..."
+                android:hint="@string/product_description_hint"
                 android:padding="16dp"
                 android:gravity="top"
                 android:textColor="@color/white"
@@ -188,7 +188,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/bg_button_primary"
-                android:text="Save Product"
+                android:text="@string/save_product"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp"

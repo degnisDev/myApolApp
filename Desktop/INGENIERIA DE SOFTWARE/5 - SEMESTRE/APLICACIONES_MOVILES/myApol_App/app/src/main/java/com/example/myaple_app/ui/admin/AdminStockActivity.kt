@@ -84,10 +84,10 @@ class AdminStockActivity : AppCompatActivity() {
 
     private fun showDeleteConfirmation(product: Product) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Eliminar Producto")
-            .setMessage("¿Estás seguro de que deseas eliminar ${product.name}? Esta acción no se puede deshacer.")
-            .setNegativeButton("Cancelar", null)
-            .setPositiveButton("Eliminar") { _, _ ->
+            .setTitle(getString(R.string.delete_product_title))
+            .setMessage(getString(R.string.delete_product_confirmation, product.name))
+            .setNegativeButton(getString(R.string.cancel), null)
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 deleteProductFromSupabase(product)
             }
             .show()
@@ -104,14 +104,14 @@ class AdminStockActivity : AppCompatActivity() {
                     }
                 }
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Producto eliminado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AdminStockActivity, getString(R.string.product_deleted_success), Toast.LENGTH_SHORT).show()
                     fetchProducts() // Actualizamos la lista tras borrar
                     selectedProduct = null
                     toggleActionButtons(false)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Error al eliminar: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminStockActivity, getString(R.string.error_format, e.message), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -153,7 +153,7 @@ class AdminStockActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminStockActivity, "Error al cargar stock: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminStockActivity, getString(R.string.error_fetch_stock, e.message), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -165,7 +165,7 @@ class AdminStockActivity : AppCompatActivity() {
         val totalValue = products.sumOf { it.price * it.stock }
 
         tvTotalUnits.text = totalUnits.toString()
-        tvTotalValue.text = String.format(Locale.getDefault(), "$%,.0f", totalValue)
+        tvTotalValue.text = String.format(Locale.getDefault(), getString(R.string.price_format_currency), totalValue)
     }
 
     override fun onResume() {

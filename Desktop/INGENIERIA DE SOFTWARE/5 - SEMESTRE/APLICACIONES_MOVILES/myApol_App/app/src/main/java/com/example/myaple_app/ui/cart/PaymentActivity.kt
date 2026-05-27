@@ -26,7 +26,7 @@ class PaymentActivity : AppCompatActivity() {
         // Listener para el botón de procesamiento de pago
         findViewById<AppCompatButton>(R.id.btnPayNow).setOnClickListener {
             // Simulación del procesamiento de la transacción
-            Toast.makeText(this, "Procesando pago...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.processing_payment), Toast.LENGTH_SHORT).show()
             finish()
         }
     }

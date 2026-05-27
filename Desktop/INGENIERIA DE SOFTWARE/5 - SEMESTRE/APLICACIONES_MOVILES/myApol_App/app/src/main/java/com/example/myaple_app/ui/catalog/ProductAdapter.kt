@@ -42,7 +42,7 @@ class ProductAdapter(private val productList: List<Product>) :
         val context = holder.itemView.context
         
         holder.tvName.text = product.name
-        holder.tvPrice.text = String.format(Locale.getDefault(), "$%,.0f", product.price)
+        holder.tvPrice.text = String.format(Locale.getDefault(), context.getString(R.string.price_format_currency), product.price)
         
         // Carga de la imagen del producto desde los recursos locales del proyecto
         val imageResId = if (!product.imageUrl.isNullOrEmpty()) {
@@ -70,9 +70,10 @@ class ProductAdapter(private val productList: List<Product>) :
 
     // Lógica para gestionar la inserción o actualización de productos en el carrito (Supabase)
     private fun addToCart(product: Product, holder: ProductViewHolder) {
+        val context = holder.itemView.context
         val user = client.auth.currentUserOrNull()
         if (user == null) {
-            Toast.makeText(holder.itemView.context, "Inicia sesión para añadir productos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.login_required_add_cart), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -80,7 +81,7 @@ class ProductAdapter(private val productList: List<Product>) :
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 holder.btnAdd.isEnabled = false
-                holder.btnAdd.text = "Añadiendo..."
+                holder.btnAdd.text = context.getString(R.string.adding)
 
                 withContext(Dispatchers.IO) {
                     // Verificamos si el producto ya existe en el carrito del usuario
@@ -109,12 +110,12 @@ class ProductAdapter(private val productList: List<Product>) :
                     }
                 }
 
-                Toast.makeText(holder.itemView.context, "${product.name} añadido al carrito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.product_added_msg, product.name), Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Toast.makeText(holder.itemView.context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.error_format, e.message), Toast.LENGTH_SHORT).show()
             } finally {
                 holder.btnAdd.isEnabled = true
-                holder.btnAdd.text = "Add to cart"
+                holder.btnAdd.text = context.getString(R.string.add_to_cart)
             }
         }
     }

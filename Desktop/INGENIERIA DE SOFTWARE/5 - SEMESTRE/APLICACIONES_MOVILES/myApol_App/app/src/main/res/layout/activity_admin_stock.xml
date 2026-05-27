@@ -40,7 +40,7 @@
             android:focusable="true"
             android:background="?attr/selectableItemBackground"
             app:tint="@color/white"
-            android:contentDescription="Back" />
+            android:contentDescription="@string/back" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="Stock Management"
+            android:text="@string/stock_management"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -62,7 +62,7 @@
             android:visibility="gone"
             app:tint="@color/white"
             tools:visibility="visible"
-            android:contentDescription="Edit" />
+            android:contentDescription="@string/edit" />
 
         <ImageView
             android:id="@+id/btnDeleteTop"
@@ -72,7 +72,7 @@
             android:visibility="gone"
             app:tint="@color/error_red"
             tools:visibility="visible"
-            android:contentDescription="Delete" />
+            android:contentDescription="@string/delete" />
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +90,7 @@
         <TextView
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="@string/id_label"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:layout_marginStart="8dp"
-            android:text="Name"
+            android:text="@string/name_label"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:gravity="center"
-            android:text="Stock"
+            android:text="@string/stock_label"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="Price"
+            android:text="@string/price_label"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -131,7 +131,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:layout_marginStart="8dp"
-            android:text="Cat"
+            android:text="@string/cat_label"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -174,14 +174,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Units"
+                    android:text="@string/total_units_label"
                     android:textColor="@color/text_hint"
                     android:textSize="10sp" />
                 <TextView
                     android:id="@+id/tvTotalUnits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -196,14 +196,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Inventory Value"
+                    android:text="@string/inventory_value_label"
                     android:textColor="@color/text_hint"
                     android:textSize="10sp" />
                 <TextView
                     android:id="@+id/tvTotalValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$0"
+                    android:text="@string/zero_currency"
                     android:textColor="@color/primary_blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -222,6 +222,6 @@
         app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Add Product" />
+        android:contentDescription="@string/add_product" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

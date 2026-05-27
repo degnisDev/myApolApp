@@ -74,7 +74,7 @@ class AdminUserActivity : AppCompatActivity() {
                 userList.addAll(users)
                 adapter.updateData(userList)
             } catch (e: Exception) {
-                showToast("Error al cargar usuarios: ${e.message}")
+                showToast(getString(R.string.error_loading_users, e.message))
             }
         }
     }
@@ -83,7 +83,7 @@ class AdminUserActivity : AppCompatActivity() {
     private fun showRoleDialog(user: User) {
         val roles = arrayOf("admin", "seller", "client")
         AlertDialog.Builder(this)
-            .setTitle("Cambiar rol para ${user.name}")
+            .setTitle(getString(R.string.change_role_title, user.name))
             .setItems(roles) { _, which ->
                 updateUserRole(user, roles[which])
             }
@@ -98,21 +98,21 @@ class AdminUserActivity : AppCompatActivity() {
                 client.postgrest["profiles"].update(updateData) {
                     filter { eq("id", user.id) }
                 }
-                showToast("Rol actualizado a $newRole")
+                showToast(getString(R.string.role_updated_success, newRole))
                 delay(800)
                 fetchUsers()
             } catch (e: Exception) {
-                showToast("Error: ${e.message}")
+                showToast(getString(R.string.error_format, e.message))
             }
         }
     }
 
     private fun showDeleteConfirmation(user: User) {
         AlertDialog.Builder(this)
-            .setTitle("Eliminar Usuario")
-            .setMessage("¿Estás seguro de que deseas eliminar a ${user.name} permanentemente?")
-            .setPositiveButton("Eliminar") { _, _ -> deleteUser(user) }
-            .setNegativeButton("Cancelar", null)
+            .setTitle(getString(R.string.delete_user_title))
+            .setMessage(getString(R.string.delete_user_confirmation, user.name))
+            .setPositiveButton(getString(R.string.delete)) { _, _ -> deleteUser(user) }
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
@@ -123,13 +123,13 @@ class AdminUserActivity : AppCompatActivity() {
                 client.postgrest["profiles"].delete {
                     filter { eq("id", user.id) }
                 }
-                showToast("Usuario eliminado correctamente")
+                showToast(getString(R.string.user_deleted_success))
                 userList.remove(user)
                 adapter.updateData(userList)
                 delay(500)
                 fetchUsers()
             } catch (e: Exception) {
-                showToast("Error al eliminar: ${e.message}")
+                showToast(getString(R.string.error_format, e.message))
             }
         }
     }

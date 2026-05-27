@@ -72,14 +72,14 @@ class AdminProductDetailActivity : AppCompatActivity() {
 
         // Si existe un producto, llenamos los campos para edición; si no, dejamos vacío para creación
         currentProduct?.let { product ->
-            tvTitle.text = "Editar Producto"
+            tvTitle.text = getString(R.string.edit_product)
             etName.setText(product.name)
             etPrice.setText(product.price.toString())
             etStock.setText(product.stock.toString())
             etCategory.setText(product.category)
             etDescription.setText(product.description)
         } ?: run {
-            tvTitle.text = "Nuevo Producto"
+            tvTitle.text = getString(R.string.new_product)
         }
     }
 
@@ -98,7 +98,7 @@ class AdminProductDetailActivity : AppCompatActivity() {
     private fun showCategoryDialog() {
         val categories = arrayOf("Smartphones", "Laptops", "Wearables", "Audio")
         MaterialAlertDialogBuilder(this)
-            .setTitle("Seleccionar Categoría")
+            .setTitle(getString(R.string.select_category))
             .setItems(categories) { _, which ->
                 etCategory.setText(categories[which])
             }
@@ -114,7 +114,7 @@ class AdminProductDetailActivity : AppCompatActivity() {
         val description = etDescription.text.toString().trim()
 
         if (name.isEmpty() || price <= 0) {
-            Toast.makeText(this, "Por favor completa los campos obligatorios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_missing_fields), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -135,12 +135,12 @@ class AdminProductDetailActivity : AppCompatActivity() {
                     client.postgrest["products"].upsert(productToSave)
                 }
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminProductDetailActivity, "Cambios guardados correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AdminProductDetailActivity, getString(R.string.product_saved_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AdminProductDetailActivity, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AdminProductDetailActivity, getString(R.string.error_save_product, e.message), Toast.LENGTH_LONG).show()
                 }
             }
         }

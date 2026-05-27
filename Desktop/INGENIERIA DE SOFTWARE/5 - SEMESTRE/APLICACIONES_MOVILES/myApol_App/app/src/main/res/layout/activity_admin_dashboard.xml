@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/stok_managment"
+                    android:text="@string/stock_management"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -109,39 +109,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#30FFFFFF" />
-
-            <!-- SECCIÓN DESHABILITADA TEMPORALMENTE: Posible funcionalidad en el futuro -->
-            <!--
-            <LinearLayout
-                android:id="@+id/btnStatistics"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_staticstics"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/statistics"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#30FFFFFF" />
-            -->
 
             <!-- Gestión de Usuarios -->
             <LinearLayout
@@ -166,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/user_managment"
+                    android:text="@string/user_management"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>

@@ -68,14 +68,14 @@ class MainActivity : AppCompatActivity() {
         val password = etPassword.text.toString().trim()
 
         if (email.isEmpty() || password.isEmpty()) {
-            showToast("Ingresa tus credenciales")
+            showToast(getString(R.string.enter_credentials))
             return
         }
 
         lifecycleScope.launch {
             try {
                 btnLogin.isEnabled = false
-                btnLogin.text = "Iniciando sesión..."
+                btnLogin.text = getString(R.string.logging_in)
 
                 // Autenticación con el servicio de Supabase
                 client.auth.signInWith(Email) {
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Recuperamos el ID del usuario autenticado
                 val userId = client.auth.currentUserOrNull()?.id 
-                    ?: throw Exception("No se encontró la sesión del usuario")
+                    ?: throw Exception(getString(R.string.error_format, "Session not found"))
 
                 // Consultamos el perfil para determinar el rol y dirigir a la vista correspondiente
                 val userProfile = client.postgrest["profiles"].select {
@@ -97,19 +97,19 @@ class MainActivity : AppCompatActivity() {
                 // Redirección basada en el rol del perfil
                 when (userProfile.role) {
                     "admin" -> {
-                        showToast("Acceso como administrador")
+                        showToast(getString(R.string.access_admin))
                         val intent = Intent(this@MainActivity, AdminDashboardActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     "seller" -> {
-                        showToast("Acceso como vendedor")
+                        showToast(getString(R.string.access_seller))
                         val intent = Intent(this@MainActivity, SellerDashboardActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     else -> {
-                        showToast("¡Bienvenido!")
+                        showToast(getString(R.string.welcome_msg))
                         val intent = Intent(this@MainActivity, CatalogActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
@@ -118,9 +118,9 @@ class MainActivity : AppCompatActivity() {
                 finish()
 
             } catch (e: Exception) {
-                showToast("Error: ${e.message}")
+                showToast(getString(R.string.error_format, e.message))
                 btnLogin.isEnabled = true
-                btnLogin.text = "LOG IN"
+                btnLogin.text = getString(R.string.log_in).uppercase()
             }
         }
     }

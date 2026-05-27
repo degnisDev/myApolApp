@@ -33,7 +33,7 @@ class AdminUserAdapter(
         
         // Asignación de datos básicos del perfil a la vista
         holder.tvName.text = user.name
-        holder.tvRole.text = "Rol: ${user.role}"
+        holder.tvRole.text = holder.itemView.context.getString(R.string.role_format, user.role)
 
         // Listeners para editar el rol o eliminar al usuario
         holder.btnEdit.setOnClickListener { onEditClick(user) }

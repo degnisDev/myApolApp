@@ -39,14 +39,14 @@ class CatalogActivity : AppCompatActivity() {
             performLogout()
         }
 
-        // Definición de la lista de productos para mostrar en el catálogo
+        // Definición de la lista de productos para mostrar en el catálogo utilizando recursos de strings
         val products = listOf(
-            Product(7, "iPhone 17 Pro Max 256 GB", "El iPhone 17 Pro Max cuenta con el chip A19 Pro y un avanzado sistema de cámaras.", 5000000.0, 10, null, "iphone17_pro_max"),
-            Product(2, "iPhone 16 Pro 512 GB", "Introduce un nuevo control de cámara y un rendimiento optimizado.", 3500000.0, 15, null, "iphone_16_pro_max"),
-            Product(3, "iPhone 15 Pro Max 256 GB", "Fabricado en titanio y con un zoom óptico potente para fotografía de alta calidad.", 2500000.0, 20, null, "iphone_15_pro"),
-            Product(4, "MacBook Air Chip M2", "La combinación ideal de portabilidad y potencia con pantalla Liquid Retina.", 4500000.0, 8, null, "mack_book_air_m2"),
-            Product(5, "Apple Watch Series 9", "Reloj inteligente con funciones avanzadas de salud y nuevos gestos táctiles.", 1000000.0, 25, null, "apple_watch"),
-            Product(6, "AirPods Pro 2da Gen", "Ofrecen el doble de cancelación activa de ruido y audio espacial personalizado.", 700000.0, 20, null, "airpods")
+            Product(7, getString(R.string.product_iphone17_name), getString(R.string.product_iphone17_desc), 5000000.0, 10, null, "iphone17_pro_max"),
+            Product(2, getString(R.string.product_iphone16_name), getString(R.string.product_iphone16_desc), 3500000.0, 15, null, "iphone_16_pro_max"),
+            Product(3, getString(R.string.product_iphone15_name), getString(R.string.product_iphone15_desc), 2500000.0, 20, null, "iphone_15_pro"),
+            Product(4, getString(R.string.product_macbook_name), getString(R.string.product_macbook_desc), 4500000.0, 8, null, "mack_book_air_m2"),
+            Product(5, getString(R.string.product_watch_name), getString(R.string.product_watch_desc), 1000000.0, 25, null, "apple_watch"),
+            Product(6, getString(R.string.product_airpods_name), getString(R.string.product_airpods_desc), 700000.0, 20, null, "airpods")
         )
 
         // Inicialización del listado de productos en formato de cuadrícula
@@ -78,7 +78,7 @@ class CatalogActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 client.auth.signOut()
-                Toast.makeText(this@CatalogActivity, "Sesión cerrada correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CatalogActivity, getString(R.string.logout_success), Toast.LENGTH_SHORT).show()
                 
                 // Redirección al login y limpieza del historial de navegación
                 val intent = Intent(this@CatalogActivity, MainActivity::class.java)
@@ -86,7 +86,7 @@ class CatalogActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } catch (e: Exception) {
-                Toast.makeText(this@CatalogActivity, "Error al cerrar sesión", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CatalogActivity, getString(R.string.error_logout), Toast.LENGTH_SHORT).show()
             }
         }
     }

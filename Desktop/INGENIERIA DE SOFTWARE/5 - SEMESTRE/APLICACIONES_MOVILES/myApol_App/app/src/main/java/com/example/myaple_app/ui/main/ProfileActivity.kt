@@ -43,7 +43,7 @@ class ProfileActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 client.auth.signOut()
-                Toast.makeText(this@ProfileActivity, "Sesión finalizada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProfileActivity, getString(R.string.session_finished), Toast.LENGTH_SHORT).show()
                 
                 // Redirección a la pantalla principal y limpieza del stack de actividades
                 val intent = Intent(this@ProfileActivity, MainActivity::class.java)
@@ -51,7 +51,7 @@ class ProfileActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } catch (e: Exception) {
-                Toast.makeText(this@ProfileActivity, "Error al cerrar sesión: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProfileActivity, getString(R.string.error_logout), Toast.LENGTH_SHORT).show()
             }
         }
     }

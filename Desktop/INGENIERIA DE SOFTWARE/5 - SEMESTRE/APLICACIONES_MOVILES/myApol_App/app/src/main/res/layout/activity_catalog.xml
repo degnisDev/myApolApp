@@ -32,7 +32,7 @@
         app:tint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Logout" />
+        android:contentDescription="@string/logout" />
 
 
     <androidx.recyclerview.widget.RecyclerView

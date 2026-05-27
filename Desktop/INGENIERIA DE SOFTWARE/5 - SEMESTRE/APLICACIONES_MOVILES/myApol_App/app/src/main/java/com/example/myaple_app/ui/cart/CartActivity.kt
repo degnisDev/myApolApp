@@ -68,7 +68,7 @@ class CartActivity : AppCompatActivity() {
                 } else {
                     // Restricción de acceso para otros roles administrativos
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@CartActivity, "Acceso restringido: Solo para clientes", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@CartActivity, getString(R.string.restricted_access_clients), Toast.LENGTH_LONG).show()
                         finish()
                     }
                 }
@@ -91,7 +91,7 @@ class CartActivity : AppCompatActivity() {
             if (cartItems.isNotEmpty()) {
                 startActivity(Intent(this, PaymentActivity::class.java))
             } else {
-                Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.empty_cart), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -134,7 +134,7 @@ class CartActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     adapter.updateData(emptyList())
-                    tvTotalValue.text = "$0"
+                    tvTotalValue.text = getString(R.string.zero_currency)
                 }
             }
         }
@@ -163,7 +163,7 @@ class CartActivity : AppCompatActivity() {
                 }
                 fetchCartItems()
             } catch (e: Exception) {
-                Toast.makeText(this@CartActivity, "Error al actualizar cantidad", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CartActivity, getString(R.string.error_update_quantity), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -179,7 +179,7 @@ class CartActivity : AppCompatActivity() {
                 }
                 fetchCartItems()
             } catch (e: Exception) {
-                Toast.makeText(this@CartActivity, "Error al eliminar producto", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CartActivity, getString(R.string.error_delete_item), Toast.LENGTH_SHORT).show()
             }
         }
     }

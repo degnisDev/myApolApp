@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Nombre del Producto"
+                android:text="@string/product_name_hint"
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="$ 0.00"
+                android:text="@string/product_price_hint"
                 android:textColor="@color/primary_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:id="@+id/tvProductDescDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aquí irá la descripción técnica..."
+                android:text="@string/product_description_hint"
                 android:textColor="#444444"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp" />
@@ -86,7 +86,7 @@
         android:layout_height="60dp"
         android:layout_margin="24dp"
         android:background="@drawable/bg_button_primary"
-        android:text="Add to cart"
+        android:text="@string/add_to_cart"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"

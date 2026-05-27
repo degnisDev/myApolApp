@@ -75,24 +75,24 @@ class RegisterActivity : AppCompatActivity() {
 
         // Validaciones básicas de formulario
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
-            showToast("Por favor completa todos los campos")
+            showToast(getString(R.string.error_missing_fields_reg))
             return
         }
 
         if (password != confirm) {
-            showToast("Las contraseñas no coinciden")
+            showToast(getString(R.string.passwords_do_not_match))
             return
         }
 
         if (password.length < 6) {
-            showToast("La contraseña debe tener al menos 6 caracteres")
+            showToast(getString(R.string.password_too_short))
             return
         }
 
         lifecycleScope.launch {
             try {
                 btnRegister.isEnabled = false
-                btnRegister.text = "Registrando..."
+                btnRegister.text = getString(R.string.registering)
 
                 // Registro del usuario en el servicio de autenticación de Supabase
                 client.auth.signUpWith(Email) {
@@ -101,7 +101,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 val userId = client.auth.currentUserOrNull()?.id 
-                    ?: throw Exception("No se pudo obtener el ID del usuario")
+                    ?: throw Exception(getString(R.string.error_reg_id))
 
                 // Creación del objeto de perfil con el rol predeterminado 'client'
                 val newUserProfile = User(
@@ -115,13 +115,13 @@ class RegisterActivity : AppCompatActivity() {
                 // Persistencia del perfil de usuario en la tabla 'profiles'
                 client.postgrest["profiles"].insert(newUserProfile)
 
-                showToast("¡Registro exitoso!")
+                showToast(getString(R.string.registration_success))
                 finish()
 
             } catch (e: Exception) {
-                showToast("Error en el registro: ${e.message}")
+                showToast(getString(R.string.error_format, e.message))
                 btnRegister.isEnabled = true
-                btnRegister.text = "SIGN UP"
+                btnRegister.text = getString(R.string.sign_up).uppercase()
             }
         }
     }
